@@ -5,5 +5,7 @@ using namespace std;
 
 int main() {
     Cartridge cart;
-    cart.loadRom("../data/PokemonRed.gb");
+    if (cart.loadRom("../data/PokemonRed.gb")) {
+        cart.printRomInfo();
+    }
 }

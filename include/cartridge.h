@@ -4,15 +4,13 @@
 #include <memory>
 using namespace std;
 
-const u16 HEADER_ADDR = 0x0100;
-
 struct RomHeader {
-    u8 entry[4];
-    u8 logo[48];
-    char title[16];
-    char manufacturer[4];
+    u8 entry[4] {};
+    u8 logo[48] {};
+    char title[16] {};
+    char manufacturer[5] {};
     u8 cgbFlag;
-    char newLicenseeCode[2];
+    char newLicenseeCode[2] {};
     u8 sgbFlag;
     u8 cartridgeType;
     u8 romSize;
@@ -27,6 +25,7 @@ struct RomHeader {
 class Cartridge {
 public:
     bool loadRom(string filename);
+    void printRomInfo();
     
 private:
     RomHeader romHeader;
