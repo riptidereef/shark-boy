@@ -8,13 +8,13 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Users/jditz/OneDrive/Desktop/C++ Projects/Projects/shark-boy/lib/raylib/src/raudio.c" "lib/raylib/raylib/CMakeFiles/raylib.dir/raudio.c.obj" "gcc" "lib/raylib/raylib/CMakeFiles/raylib.dir/raudio.c.obj.d"
-  "C:/Users/jditz/OneDrive/Desktop/C++ Projects/Projects/shark-boy/lib/raylib/src/rcore.c" "lib/raylib/raylib/CMakeFiles/raylib.dir/rcore.c.obj" "gcc" "lib/raylib/raylib/CMakeFiles/raylib.dir/rcore.c.obj.d"
-  "C:/Users/jditz/OneDrive/Desktop/C++ Projects/Projects/shark-boy/lib/raylib/src/rmodels.c" "lib/raylib/raylib/CMakeFiles/raylib.dir/rmodels.c.obj" "gcc" "lib/raylib/raylib/CMakeFiles/raylib.dir/rmodels.c.obj.d"
-  "C:/Users/jditz/OneDrive/Desktop/C++ Projects/Projects/shark-boy/lib/raylib/src/rshapes.c" "lib/raylib/raylib/CMakeFiles/raylib.dir/rshapes.c.obj" "gcc" "lib/raylib/raylib/CMakeFiles/raylib.dir/rshapes.c.obj.d"
-  "C:/Users/jditz/OneDrive/Desktop/C++ Projects/Projects/shark-boy/lib/raylib/src/rtext.c" "lib/raylib/raylib/CMakeFiles/raylib.dir/rtext.c.obj" "gcc" "lib/raylib/raylib/CMakeFiles/raylib.dir/rtext.c.obj.d"
-  "C:/Users/jditz/OneDrive/Desktop/C++ Projects/Projects/shark-boy/lib/raylib/src/rtextures.c" "lib/raylib/raylib/CMakeFiles/raylib.dir/rtextures.c.obj" "gcc" "lib/raylib/raylib/CMakeFiles/raylib.dir/rtextures.c.obj.d"
-  "C:/Users/jditz/OneDrive/Desktop/C++ Projects/Projects/shark-boy/lib/raylib/src/utils.c" "lib/raylib/raylib/CMakeFiles/raylib.dir/utils.c.obj" "gcc" "lib/raylib/raylib/CMakeFiles/raylib.dir/utils.c.obj.d"
+  "C:/Users/jditz/Desktop/GameDev/Emulator/shark-boy/lib/raylib/src/raudio.c" "lib/raylib/raylib/CMakeFiles/raylib.dir/raudio.c.obj" "gcc" "lib/raylib/raylib/CMakeFiles/raylib.dir/raudio.c.obj.d"
+  "C:/Users/jditz/Desktop/GameDev/Emulator/shark-boy/lib/raylib/src/rcore.c" "lib/raylib/raylib/CMakeFiles/raylib.dir/rcore.c.obj" "gcc" "lib/raylib/raylib/CMakeFiles/raylib.dir/rcore.c.obj.d"
+  "C:/Users/jditz/Desktop/GameDev/Emulator/shark-boy/lib/raylib/src/rmodels.c" "lib/raylib/raylib/CMakeFiles/raylib.dir/rmodels.c.obj" "gcc" "lib/raylib/raylib/CMakeFiles/raylib.dir/rmodels.c.obj.d"
+  "C:/Users/jditz/Desktop/GameDev/Emulator/shark-boy/lib/raylib/src/rshapes.c" "lib/raylib/raylib/CMakeFiles/raylib.dir/rshapes.c.obj" "gcc" "lib/raylib/raylib/CMakeFiles/raylib.dir/rshapes.c.obj.d"
+  "C:/Users/jditz/Desktop/GameDev/Emulator/shark-boy/lib/raylib/src/rtext.c" "lib/raylib/raylib/CMakeFiles/raylib.dir/rtext.c.obj" "gcc" "lib/raylib/raylib/CMakeFiles/raylib.dir/rtext.c.obj.d"
+  "C:/Users/jditz/Desktop/GameDev/Emulator/shark-boy/lib/raylib/src/rtextures.c" "lib/raylib/raylib/CMakeFiles/raylib.dir/rtextures.c.obj" "gcc" "lib/raylib/raylib/CMakeFiles/raylib.dir/rtextures.c.obj.d"
+  "C:/Users/jditz/Desktop/GameDev/Emulator/shark-boy/lib/raylib/src/utils.c" "lib/raylib/raylib/CMakeFiles/raylib.dir/utils.c.obj" "gcc" "lib/raylib/raylib/CMakeFiles/raylib.dir/utils.c.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

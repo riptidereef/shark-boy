@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/jditz/OneDrive/Desktop/C++ Projects/Projects/shark-boy/lib/raylib/src/external/glfw/src
+# Install script for directory: C:/Users/jditz/Desktop/GameDev/Emulator/shark-boy/lib/raylib/src/external/glfw/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -32,8 +32,8 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
-# Set default install directory permissions.
+# Set path to fallback-tool for dependency-resolution.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "C:/msys64/mingw64/bin/objdump.exe")
+  set(CMAKE_OBJDUMP "C:/Program Files (x86)/i686-8.1.0-release-win32-dwarf-rt_v6-rev0/mingw32/bin/objdump.exe")
 endif()
 

@@ -8,7 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Users/jditz/OneDrive/Desktop/C++ Projects/Projects/shark-boy/src/main.cpp" "CMakeFiles/game.dir/src/main.cpp.obj" "gcc" "CMakeFiles/game.dir/src/main.cpp.obj.d"
+  "C:/Users/jditz/Desktop/GameDev/Emulator/shark-boy/src/cartridge.cpp" "CMakeFiles/game.dir/src/cartridge.cpp.obj" "gcc" "CMakeFiles/game.dir/src/cartridge.cpp.obj.d"
+  "C:/Users/jditz/Desktop/GameDev/Emulator/shark-boy/src/main.cpp" "CMakeFiles/game.dir/src/main.cpp.obj" "gcc" "CMakeFiles/game.dir/src/main.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

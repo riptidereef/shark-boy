@@ -1,8 +1,9 @@
 #include <iostream>
 #include <common.h>
+#include <cartridge.h>
 using namespace std;
 
 int main() {
-    u8 test = 255;
-    cout << static_cast<int>(test) << endl;
+    Cartridge cart;
+    cart.loadRom("../data/PokemonRed.gb");
 }

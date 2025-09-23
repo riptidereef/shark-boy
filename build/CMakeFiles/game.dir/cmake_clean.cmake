@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/game.dir/src/cartridge.cpp.obj"
+  "CMakeFiles/game.dir/src/cartridge.cpp.obj.d"
   "CMakeFiles/game.dir/src/main.cpp.obj"
   "CMakeFiles/game.dir/src/main.cpp.obj.d"
   "game.exe"
