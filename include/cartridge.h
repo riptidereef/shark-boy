@@ -8,7 +8,7 @@ struct RomHeader {
     u8 entry[4] {};
     u8 logo[48] {};
     char title[16] {};
-    char manufacturer[5] {};
+    char manufacturer[4] {};
     u8 cgbFlag;
     char newLicenseeCode[2] {};
     u8 sgbFlag;

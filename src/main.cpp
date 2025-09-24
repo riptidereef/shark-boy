@@ -1,11 +1,10 @@
 #include <iostream>
-#include <common.h>
-#include <cartridge.h>
+#include "common.h"
+#include "cartridge.h"
+#include "emulator.h"
 using namespace std;
 
 int main() {
-    Cartridge cart;
-    if (cart.loadRom("../data/PokemonRed.gb")) {
-        cart.printRomInfo();
-    }
+    Emulator emu;
+    emu.loadCartridge("../data/PokemonRed.gb");
 }
