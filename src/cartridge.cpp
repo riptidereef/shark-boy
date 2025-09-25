@@ -5,15 +5,19 @@
 #include <sstream>
 #include <unordered_map>
 
-bool Cartridge::loadRom(string filename) {
-    ifstream file(filename, ios::binary | ios::ate);
+Cartridge::Cartridge(string romPath) {
+    loadRom(romPath);
+}
+
+bool Cartridge::loadRom(string romPath) {
+    ifstream file(romPath, ios::binary | ios::ate);
 
     if (!file) {
-        cerr << "Failed to open ROM: " << filename << endl;
+        cerr << "Failed to open ROM: " << romPath << endl;
         return false;
     }
 
-    this->filename = filename;
+    this->romPath = romPath;
 
     romSize = file.tellg();
     file.seekg(0, ios::beg);
@@ -193,7 +197,7 @@ inline std::string getNewLicenseeName(const std::string &code) {
     return "Unknown Licensee";
 }
 
-inline std::string getPublisher(u8 oldCode, std::string newCode) {
+inline std::string getPublisherName(u8 oldCode, std::string newCode) {
     switch (oldCode) {
         case 0x00: return "None";
         case 0x01: return "Nintendo";
@@ -348,12 +352,12 @@ inline std::string getPublisher(u8 oldCode, std::string newCode) {
 
 void Cartridge::printRomInfo() {
     cout << "=== ROM Information ===\n";
-    cout << "Filename: " << this->filename << "\n";
+    cout << "ROM Path: " << this->romPath << "\n";
 
     cout << "Title: " << toStringFromArray(romHeader.title, sizeof(romHeader.title)) << "\n";
     cout << "Manufacturer: " << toStringFromArray(romHeader.manufacturer, sizeof(romHeader.manufacturer)) << "\n";
 
-    string publisher = getPublisher(romHeader.oldLicenseeCode, std::string(romHeader.newLicenseeCode, 2));
+    string publisher = getPublisherName(romHeader.oldLicenseeCode, std::string(romHeader.newLicenseeCode, 2));
     cout << "Publisher: " << publisher << "\n";
 
     cout << "CGB Flag: 0x" << hex << setw(2) << setfill('0') << (int)romHeader.cgbFlag << dec << "\n";

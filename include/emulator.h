@@ -1,17 +1,19 @@
 #pragma once
 #include <string>
+#include <memory>
 #include "common.h"
 #include "cartridge.h"
+#include "cpu.h"
+#include "mmu.h"
 using namespace std;
 
 class Emulator {
 public:
-    bool paused;
-    bool running;
-    u64 ticks;
-
+    Emulator();
     void loadCartridge(const string& romPath);
 
 private:
-    Cartridge cart;
+    unique_ptr<Cartridge> cartridge;
+    unique_ptr<CPU> cpu;
+    unique_ptr<MMU> mmu;
 };

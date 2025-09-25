@@ -1,11 +1,11 @@
 #include "emulator.h"
 #include <iostream>
 
+Emulator::Emulator() {
+    loadCartridge("../data/PokemonRed.gb");
+}
+
 void Emulator::loadCartridge(const string& romPath) {
-    if (cart.loadRom(romPath)) {
-        cart.printRomInfo();
-    }
-    else {
-        cout << "Failed to load cartridge: " << romPath << endl;
-    }
+    cartridge = make_unique<Cartridge>(romPath);
+    cartridge->printRomInfo();
 }

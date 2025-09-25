@@ -24,12 +24,14 @@ struct RomHeader {
 
 class Cartridge {
 public:
-    bool loadRom(string filename);
+    Cartridge(string romPath);
     void printRomInfo();
     
 private:
+    bool loadRom(string filename);
+
     RomHeader romHeader;
-    string filename;
+    string romPath;
     u32 romSize;
     unique_ptr<u8[]> romData;
 };
