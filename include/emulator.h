@@ -11,6 +11,7 @@ class Emulator {
 public:
     Emulator();
     void loadCartridge(const string& romPath);
+    void run();
 
 private:
     unique_ptr<Cartridge> cartridge;

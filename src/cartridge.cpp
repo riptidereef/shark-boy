@@ -13,8 +13,11 @@ bool Cartridge::loadRom(string romPath) {
     ifstream file(romPath, ios::binary | ios::ate);
 
     if (!file) {
-        cerr << "Failed to open ROM: " << romPath << endl;
-        return false;
+        file.open("../" + romPath, ios::binary | ios::ate);
+        if (!file) {
+            cerr << "Failed to open ROM: " << romPath << endl;
+            return false;
+        }
     }
 
     this->romPath = romPath;
@@ -53,6 +56,7 @@ bool Cartridge::loadRom(string romPath) {
 
 u8 Cartridge::read8(u16 address) {
     if (address < romSize) {
+        u8 val = romData[address];
         return romData[address];
     }
     else return 0xFF;
