@@ -1,7 +1,10 @@
 #pragma once
+#include "mmu.h"
 
 class CPU {
 public:
+    CPU(MMU* mmu);
+
     struct {
         union { struct { u8 f, a; }; u16 af; };
         union { struct { u8 c, b; }; u16 bc; };
@@ -13,5 +16,5 @@ public:
     u16 pc;
 
 private:
-
+    MMU* mmu;
 };

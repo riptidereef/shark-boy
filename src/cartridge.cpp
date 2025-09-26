@@ -51,6 +51,20 @@ bool Cartridge::loadRom(string romPath) {
     return true;
 }
 
+u8 Cartridge::read8(u16 address) {
+    if (address < romSize) {
+        return romData[address];
+    }
+    else return 0xFF;
+}
+
+u16 Cartridge::read16(u16 address) {
+    if (address < romSize - 1) {
+        return ((romData[address + 1] << 8) | romData[address]);
+    }
+    else return 0xFFFF;
+}
+
 inline std::string getCartridgeType(u8 cartType) {
     switch (cartType) {
         case 0x00: return "ROM ONLY";

@@ -16,4 +16,5 @@ private:
     unique_ptr<Cartridge> cartridge;
     unique_ptr<CPU> cpu;
     unique_ptr<MMU> mmu;
+    unique_ptr<PPU> ppu;
 };
