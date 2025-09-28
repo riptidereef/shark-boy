@@ -21,5 +21,5 @@ void MMU::write16(u16 address, u16 data) {
 }
 
 u16 MMU::read16(u16 address) {
-    return 0x0000;
+    return cartridge->read16(address);
 }

@@ -27,6 +27,8 @@ CPU::CPU(MMU* mmu) {
     opcodes[0x0D] = &CPU::OP_DEC_C;
     opcodes[0x0E] = &CPU::OP_LD_C_d8;
     opcodes[0x0F] = &CPU::OP_RRCA;
+
+    opcodes[0xC3] = &CPU::OP_JP_a16;
 }
 
 void CPU::step() {
