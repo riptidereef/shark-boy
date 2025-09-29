@@ -397,4 +397,5 @@ void Cartridge::printRomInfo() {
     cout << "Mask ROM Version: 0x" << hex << setw(2) << setfill('0') << (int)romHeader.maskRomVersion << dec << "\n";
     //cout << "Header Checksum: 0x" << hex << setw(2) << setfill('0') << (int)romHeader.headerChecksum << dec << "\n";
     //cout << "Global Checksum: 0x" << hex << setw(4) << setfill('0') << romHeader.globalChecksum << dec << "\n";
+    cout << "\n";
 }
