@@ -76,7 +76,7 @@ public:
     u32 OP_DEC_D();
     u32 OP_LD_D_d8();
     u32 OP_RLA();
-    u32 OP_JR_s8();
+    u32 OP_JR_r8();
     u32 OP_ADD_HL_DE();
     u32 OP_LD_A_DE();
     u32 OP_DEC_DE();
@@ -86,7 +86,7 @@ public:
     u32 OP_RRA();
 
     // 0x20-0x2F
-    u32 OP_JR_NZ_s8();
+    u32 OP_JR_NZ_r8();
     u32 OP_LD_HL_d16();
     u32 OP_LD_HLp_A();
     u32 OP_INC_HL();
@@ -94,7 +94,7 @@ public:
     u32 OP_DEC_H();
     u32 OP_LD_H_d8();
     u32 OP_DAA();
-    u32 OP_JR_Z_s8();
+    u32 OP_JR_Z_r8();
     u32 OP_ADD_HL_HL();
     u32 OP_LD_A_HLp();
     u32 OP_DEC_HL();
@@ -104,7 +104,7 @@ public:
     u32 OP_CPL();
 
     // 0x30-0x3F
-    u32 OP_JR_NC_s8();
+    u32 OP_JR_NC_r8();
     u32 OP_LD_SP_d16();
     u32 OP_LD_HLm_A();
     u32 OP_INC_SP();
@@ -112,7 +112,7 @@ public:
     u32 OP_DEC_aHL();
     u32 OP_LD_HL_d8();
     u32 OP_SCF();
-    u32 OP_JR_C_s8();
+    u32 OP_JR_C_r8();
     u32 OP_ADD_HL_SP();
     u32 OP_LD_A_HLm();
     u32 OP_DEC_SP();
@@ -310,7 +310,7 @@ public:
     u32 OP_PUSH_HL();
     u32 OP_AND_d8();
     u32 OP_RST_4();
-    u32 OP_ADD_SP_s8();
+    u32 OP_ADD_SP_r8();
     u32 OP_JP_HL();
     u32 OP_LD_a16_A();
     // u32 OP_UNDEFINED_EB();
@@ -328,7 +328,7 @@ public:
     u32 OP_PUSH_AF();
     u32 OP_OR_d8();
     u32 OP_RST_6();
-    u32 OP_LD_HL_SP_s8();
+    u32 OP_LD_HL_SP_r8();
     u32 OP_LD_SP_HL();
     u32 OP_LD_A_a16();
     u32 OP_EI();

@@ -29,6 +29,22 @@ CPU::CPU(MMU* mmu) {
     opcodes[0x0D] = {"DEC C",        &CPU::OP_DEC_C};
     opcodes[0x0E] = {"LD C, d8",     &CPU::OP_LD_C_d8};
     opcodes[0x0F] = {"RRCA",         &CPU::OP_RRCA};
+    opcodes[0x10] = {"STOP",         &CPU::OP_STOP};
+    opcodes[0x11] = {"LD DE, d16",   &CPU::OP_LD_DE_d16};
+    opcodes[0x12] = {"LD (DE), A",   &CPU::OP_LD_DE_A};
+    opcodes[0x13] = {"INC DE",       &CPU::OP_INC_DE};
+    opcodes[0x14] = {"INC D",        &CPU::OP_INC_D};
+    opcodes[0x15] = {"DEC D",        &CPU::OP_DEC_D};
+    opcodes[0x16] = {"LD D, d8",     &CPU::OP_LD_D_d8};
+    opcodes[0x17] = {"RLA",          &CPU::OP_RLA};
+    opcodes[0x18] = {"JR r8",        &CPU::OP_JR_r8};
+    opcodes[0x19] = {"ADD HL, DE",   &CPU::OP_ADD_HL_DE};
+    opcodes[0x1A] = {"LD A, (DE)",   &CPU::OP_LD_A_DE};
+    opcodes[0x1B] = {"DEC DE",       &CPU::OP_DEC_DE};
+    opcodes[0x1C] = {"INC E",        &CPU::OP_INC_E};
+    opcodes[0x1D] = {"DEC E",        &CPU::OP_DEC_E};
+    opcodes[0x1E] = {"LD E, d8",     &CPU::OP_LD_E_d8};
+    opcodes[0x1F] = {"RRA",          &CPU::OP_RRA};
 
     // Example later instruction
     opcodes[0xC3] = {"JP a16",      &CPU::OP_JP_a16};
