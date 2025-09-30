@@ -184,6 +184,53 @@ u32 CPU::OP_RRA() {
     return 4;
 }
 
+u32 CPU::OP_JR_NZ_r8() {
+    s8 jrAmount = static_cast<s8>(fetch8());
+    if (!getZ()) {
+        pc += jrAmount;
+        return 12;
+    }
+    else {
+        return 8;
+    }
+}
+
+u32 CPU::OP_LD_HL_d16() {
+    regs.hl = fetch16();
+    return 12;
+}
+
+u32 CPU::OP_LD_HLp_A() {
+    mmu->write8(regs.hl, regs.a);
+    regs.hl++;
+    return 8;
+}
+
+u32 CPU::OP_INC_HL() {
+    regs.hl++;
+    return 8;
+}
+
+u32 CPU::OP_INC_H() {
+    inc8(regs.h);
+    return 4;
+}
+
+u32 CPU::OP_DEC_H() {
+    dec8(regs.h);
+    return 4;
+}
+
+u32 CPU::OP_LD_H_d8() {
+    regs.h = fetch8();
+    return 8;
+}
+
+// FIXME
+u32 CPU::OP_DAA() {
+
+    return 4;
+}
 
 
 
