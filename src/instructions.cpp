@@ -1,72 +1,97 @@
 #include "cpu.h"
 #include <iostream>
 
-void CPU::OP_NOP() {
-    std::cout << "Executed NOP" << std::endl;
+u32 CPU::OP_NOP() {
+    return 4;
 }
 
-void CPU::OP_LD_BC_d16() {
-    std::cout << "Executed LD BC, d16" << std::endl;
+u32 CPU::OP_LD_BC_d16() {
+    regs.bc = fetch16();
+    return 12;
 }
 
-void CPU::OP_LD_BC_A() {
-    std::cout << "Executed LD (BC), A" << std::endl;
+u32 CPU::OP_LD_BC_A() {
+    mmu->write8(regs.bc, regs.a);
+    return 8;
 }
 
-void CPU::OP_INC_BC() {
-    std::cout << "Executed INC BC" << std::endl;
+u32 CPU::OP_INC_BC() {
+    regs.bc++;
+    return 8;
 }
 
-void CPU::OP_INC_B() {
-    std::cout << "Executed INC B" << std::endl;
+u32 CPU::OP_INC_B() {
+    inc8(regs.b);
+    return 4;
 }
 
-void CPU::OP_DEC_B() {
-    std::cout << "Executed DEC B" << std::endl;
+u32 CPU::OP_DEC_B() {
+    dec8(regs.b);
+    return 4;
 }
 
-void CPU::OP_LD_B_d8() {
-    std::cout << "Executed LD B, d8" << std::endl;
+u32 CPU::OP_LD_B_d8() {
+    regs.b = fetch8();
+    return 8;
 }
 
-void CPU::OP_RLCA() {
-    std::cout << "Executed RLCA" << std::endl;
+u32 CPU::OP_RLCA() {
+    u8 leftBit = (regs.a >> 7) & 0x1;
+    regs.a = (regs.a << 1) | leftBit;
+    setZ(0);
+    setN(0);
+    setH(0);
+    setC(leftBit);
+    return 4;
 }
 
-void CPU::OP_LD_a16_SP() {
-    std::cout << "Executed LD (a16), SP" << std::endl;
+u32 CPU::OP_LD_a16_SP() {
+    u16 a16 = fetch16();
+    mmu->write16(a16, sp);
+    return 20;
 }
 
-void CPU::OP_ADD_HL_BC() {
-    std::cout << "Executed ADD HL, BC" << std::endl;
+u32 CPU::OP_ADD_HL_BC() {
+    add16(regs.hl, regs.bc);
+    return 8;
 }
 
-void CPU::OP_LD_A_BC() {
-    std::cout << "Executed LD A, (BC)" << std::endl;
+u32 CPU::OP_LD_A_BC() {
+    regs.a = mmu->read8(regs.bc);
+    return 8;
 }
 
-void CPU::OP_DEC_BC() {
-    std::cout << "Executed DEC BC" << std::endl;
+u32 CPU::OP_DEC_BC() {
+    regs.bc--;
+    return 8;
 }
 
-void CPU::OP_INC_C() {
-    std::cout << "Executed INC C" << std::endl;
+u32 CPU::OP_INC_C() {
+    inc8(regs.c);
+    return 4;
 }
 
-void CPU::OP_DEC_C() {
-    std::cout << "Executed DEC C" << std::endl;
+u32 CPU::OP_DEC_C() {
+    dec8(regs.c);
+    return 4;
 }
 
-void CPU::OP_LD_C_d8() {
-    std::cout << "Executed LD C, d8" << std::endl;
+u32 CPU::OP_LD_C_d8() {
+    regs.c = fetch8();
+    return 8;
 }
 
-void CPU::OP_RRCA() {
-    std::cout << "Executed RRCA" << std::endl;
+u32 CPU::OP_RRCA() {
+    u8 rightBit = regs.a & 0x1;
+    regs.a = (rightBit << 7) | (regs.a >> 1);
+    setZ(0);
+    setN(0);
+    setH(0);
+    setC(rightBit);
+    return 4;
 }
 
-void CPU::OP_JP_a16() {
-    std::cout << "Executed JP a16" << std::endl;
-    u16 jpAddress = mmu->read16(pc);
-    pc = jpAddress;
+u32 CPU::OP_JP_a16() {
+    pc = peek16();
+    return 16;
 }

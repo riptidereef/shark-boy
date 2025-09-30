@@ -65,6 +65,12 @@
     "xmemory": "cpp",
     "xstring": "cpp",
     "xtr1common": "cpp",
-    "xutility": "cpp"
+    "xutility": "cpp",
+    "cstdarg": "cpp",
+    "cwctype": "cpp",
+    "deque": "cpp",
+    "memory_resource": "cpp",
+    "string_view": "cpp",
+    "cinttypes": "cpp"
   }
 }
