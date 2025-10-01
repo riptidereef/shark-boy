@@ -232,11 +232,162 @@ u32 CPU::OP_DAA() {
     return 4;
 }
 
+u32 CPU::OP_JR_Z_r8() {
+    s8 jrAmount = static_cast<s8>(fetch8());
+    if (getZ()) {
+        pc += jrAmount;
+        return 12;
+    }
+    else {
+        return 8;
+    }
+}
 
+u32 CPU::OP_ADD_HL_HL() {
+    add16(regs.hl, regs.hl);
+    return 8;
+}
 
+u32 CPU::OP_LD_A_HLp() {
+    regs.a = mmu->read8(regs.hl);
+    regs.hl++;
+    return 8;
+}
 
+u32 CPU::OP_DEC_HL() {
+    regs.hl--;
+    return 8;
+}
 
+u32 CPU::OP_INC_L() {
+    inc8(regs.l);
+    return 4;
+}
 
+u32 CPU::OP_DEC_L() {
+    dec8(regs.l);
+    return 4;
+}
+
+u32 CPU::OP_LD_L_d8() {
+    regs.l = fetch8();
+    return 8;
+}
+
+u32 CPU::OP_CPL() {
+    setN(1);
+    setH(1);
+    regs.a = ~regs.a;
+    return 4;
+}
+
+u32 CPU::OP_JR_NC_r8() {
+    s8 jrAmount = static_cast<s8>(fetch8());
+    if (!getC()) {
+        pc += jrAmount;
+        return 12;
+    }
+    else {
+        return 8;
+    }
+}
+
+u32 CPU::OP_LD_SP_d16() {
+    sp = fetch16();
+    return 12;
+}
+
+u32 CPU::OP_LD_HLm_A() {
+    mmu->write8(regs.hl, regs.a);
+    regs.hl--;
+    return 8;
+}
+
+u32 CPU::OP_INC_SP() {
+    sp++;
+    return 8;
+}
+
+u32 CPU::OP_INC_aHL() {
+    u8 r = mmu->read8(regs.hl);
+    setH((r & 0x0F) == 0x0F);
+    r++;
+    mmu->write8(regs.hl, r);
+    setZ(r == 0);
+    setN(0);
+    return 12;
+}
+
+u32 CPU::OP_DEC_aHL() {
+    u8 r = mmu->read8(regs.hl);
+    setH((r & 0x0F) == 0x00);
+    r--;
+    mmu->write8(regs.hl, r);
+    setZ(r == 0);
+    setN(1);
+    return 12;
+}
+
+u32 CPU::OP_LD_HL_d8() {
+    mmu->write8(regs.hl, fetch8());
+    return 12;
+}
+
+u32 CPU::OP_SCF() {
+    setN(0);
+    setH(0);
+    setC(1);
+    return 4;
+}
+
+u32 CPU::OP_JR_C_r8() {
+    s8 jrAmount = static_cast<s8>(fetch8());
+    if (getC()) {
+        pc += jrAmount;
+        return 12;
+    }
+    else {
+        return 8;
+    }
+}
+
+u32 CPU::OP_ADD_HL_SP() {
+    add16(regs.hl, sp);
+    return 8;
+}
+
+u32 CPU::OP_LD_A_HLm() {
+    regs.a = mmu->read8(regs.hl);
+    regs.hl--;
+    return 8;
+}
+
+u32 CPU::OP_DEC_SP() {
+    sp--;
+    return 8;
+}
+
+u32 CPU::OP_INC_A() {
+    inc8(regs.a);
+    return 4;
+}
+
+u32 CPU::OP_DEC_A() {
+    dec8(regs.a);
+    return 4;
+}
+
+u32 CPU::OP_LD_A_d8() {
+    regs.a = fetch8();
+    return 8;
+}
+
+u32 CPU::OP_CCF() {
+    setN(0);
+    setH(0);
+    setC(!getC());
+    return 4;
+}
 
 
 
