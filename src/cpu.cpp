@@ -141,6 +141,71 @@ CPU::CPU(MMU* mmu) {
     opcodes[0x7D] = {"LD A, L",      &CPU::OP_LD_A_L};
     opcodes[0x7E] = {"LD A, (HL)",   &CPU::OP_LD_A_HL};
     opcodes[0x7F] = {"LD A, A",      &CPU::OP_LD_A_A};
+    opcodes[0x80] = {"ADD A, B",     &CPU::OP_ADD_A_B};
+    opcodes[0x81] = {"ADD A, C",     &CPU::OP_ADD_A_C};
+    opcodes[0x82] = {"ADD A, D",     &CPU::OP_ADD_A_D};
+    opcodes[0x83] = {"ADD A, E",     &CPU::OP_ADD_A_E};
+    opcodes[0x84] = {"ADD A, H",     &CPU::OP_ADD_A_H};
+    opcodes[0x85] = {"ADD A, L",     &CPU::OP_ADD_A_L};
+    opcodes[0x86] = {"ADD A, (HL)",  &CPU::OP_ADD_A_HL};
+    opcodes[0x87] = {"ADD A, A",     &CPU::OP_ADD_A_A};
+    opcodes[0x88] = {"ADC A, B",     &CPU::OP_ADC_A_B};
+    opcodes[0x89] = {"ADC A, C",     &CPU::OP_ADC_A_C};
+    opcodes[0x8A] = {"ADC A, D",     &CPU::OP_ADC_A_D};
+    opcodes[0x8B] = {"ADC A, E",     &CPU::OP_ADC_A_E};
+    opcodes[0x8C] = {"ADC A, H",     &CPU::OP_ADC_A_H};
+    opcodes[0x8D] = {"ADC A, L",     &CPU::OP_ADC_A_L};
+    opcodes[0x8E] = {"ADC A, (HL)",  &CPU::OP_ADC_A_HL};
+    opcodes[0x8F] = {"ADC A, A",     &CPU::OP_ADC_A_A};
+    opcodes[0x90] = {"SUB B",        &CPU::OP_SUB_B};
+    opcodes[0x91] = {"SUB C",        &CPU::OP_SUB_C};
+    opcodes[0x92] = {"SUB D",        &CPU::OP_SUB_D};
+    opcodes[0x93] = {"SUB E",        &CPU::OP_SUB_E};
+    opcodes[0x94] = {"SUB H",        &CPU::OP_SUB_H};
+    opcodes[0x95] = {"SUB L",        &CPU::OP_SUB_L};
+    opcodes[0x96] = {"SUB (HL)",     &CPU::OP_SUB_HL};
+    opcodes[0x97] = {"SUB A",        &CPU::OP_SUB_A};
+    opcodes[0x98] = {"SBC A, B",     &CPU::OP_SBC_A_B};
+    opcodes[0x99] = {"SBC A, C",     &CPU::OP_SBC_A_C};
+    opcodes[0x9A] = {"SBC A, D",     &CPU::OP_SBC_A_D};
+    opcodes[0x9B] = {"SBC A, E",     &CPU::OP_SBC_A_E};
+    opcodes[0x9C] = {"SBC A, H",     &CPU::OP_SBC_A_H};
+    opcodes[0x9D] = {"SBC A, L",     &CPU::OP_SBC_A_L};
+    opcodes[0x9E] = {"SBC A, (HL)",  &CPU::OP_SBC_A_HL};
+    opcodes[0x9F] = {"SBC A, A",     &CPU::OP_SBC_A_A};
+    opcodes[0xA0] = {"AND B",        &CPU::OP_AND_B};
+    opcodes[0xA1] = {"AND C",        &CPU::OP_AND_C};
+    opcodes[0xA2] = {"AND D",        &CPU::OP_AND_D};
+    opcodes[0xA3] = {"AND E",        &CPU::OP_AND_E};
+    opcodes[0xA4] = {"AND H",        &CPU::OP_AND_H};
+    opcodes[0xA5] = {"AND L",        &CPU::OP_AND_L};
+    opcodes[0xA6] = {"AND (HL)",     &CPU::OP_AND_HL};
+    opcodes[0xA7] = {"AND A",        &CPU::OP_AND_A};
+    opcodes[0xA8] = {"XOR B",        &CPU::OP_XOR_B};
+    opcodes[0xA9] = {"XOR C",        &CPU::OP_XOR_C};
+    opcodes[0xAA] = {"XOR D",        &CPU::OP_XOR_D};
+    opcodes[0xAB] = {"XOR E",        &CPU::OP_XOR_E};
+    opcodes[0xAC] = {"XOR H",        &CPU::OP_XOR_H};
+    opcodes[0xAD] = {"XOR L",        &CPU::OP_XOR_L};
+    opcodes[0xAE] = {"XOR (HL)",     &CPU::OP_XOR_HL};
+    opcodes[0xAF] = {"XOR A",        &CPU::OP_XOR_A};
+    opcodes[0xB0] = {"OR B",         &CPU::OP_OR_B};
+    opcodes[0xB1] = {"OR C",         &CPU::OP_OR_C};
+    opcodes[0xB2] = {"OR D",         &CPU::OP_OR_D};
+    opcodes[0xB3] = {"OR E",         &CPU::OP_OR_E};
+    opcodes[0xB4] = {"OR H",         &CPU::OP_OR_H};
+    opcodes[0xB5] = {"OR L",         &CPU::OP_OR_L};
+    opcodes[0xB6] = {"OR (HL)",      &CPU::OP_OR_HL};
+    opcodes[0xB7] = {"OR A",         &CPU::OP_OR_A};
+    opcodes[0xB8] = {"CP B",         &CPU::OP_CP_B};
+    opcodes[0xB9] = {"CP C",         &CPU::OP_CP_C};
+    opcodes[0xBA] = {"CP D",         &CPU::OP_CP_D};
+    opcodes[0xBB] = {"CP E",         &CPU::OP_CP_E};
+    opcodes[0xBC] = {"CP H",         &CPU::OP_CP_H};
+    opcodes[0xBD] = {"CP L",         &CPU::OP_CP_L};
+    opcodes[0xBE] = {"CP (HL)",      &CPU::OP_CP_HL};
+    opcodes[0xBF] = {"CP A",         &CPU::OP_CP_A};
+
 
     // Example later instruction
     opcodes[0xC3] = {"JP a16",       &CPU::OP_JP_a16};
@@ -182,22 +247,93 @@ void CPU::dec8(u8& r) {
     setN(1);
 }
 
-void CPU::add8(u8& r1, u8 r2) {
-    
-}
-
 void CPU::add16(u16& r1, u16 r2) {
     u32 res = static_cast<u32>(r1) + static_cast<u32>(r2);
-
+    
     setN(0);
     setH(((r1 & 0x0FFF) + (r2 & 0x0FFF)) > 0x0FFF);
     setC(res > 0xFFFF);
-
+    
     r1 = static_cast<u16>(res);
 }
 
-void CPU::ldRegToReg(u8& dst, u8 src) {
-    dst = src;
+void CPU::add8(u8& r1, u8 r2) {
+    u16 res = static_cast<u16>(r1) + static_cast<u16>(r2);
+
+    setZ(static_cast<u8>(res) == 0);
+    setN(0);
+    setH(((r1 & 0xF) + (r2 & 0xF)) > 0xF);
+    setC(res > 0xFF);
+
+    r1 = static_cast<u8>(res);
+}
+
+void CPU::adc8(u8& r1, u8 r2) {
+    u8 carry = getC();
+    u16 res = static_cast<u16>(r1) + static_cast<u16>(r2) + carry;
+
+    setZ(static_cast<u8>(res) == 0);
+    setN(0);
+    setH(((r1 & 0xF) + (r2 & 0xF) + carry) > 0xF);
+    setC(res > 0xFF);
+
+    r1 = static_cast<u8>(res);
+}
+
+void CPU::sub8(u8& r1, u8 r2) {
+    u16 res = static_cast<u16>(r1) - static_cast<u16>(r2);
+
+    setZ(static_cast<u8>(res) == 0);
+    setN(1);
+    setH((r1 & 0xF) < (r2 & 0xF));
+    setC(r1 < r2);
+
+    r1 = static_cast<u8>(res);
+}
+
+void CPU::sbc8(u8& r1, u8 r2) {
+    u8 carry = getC();
+    u16 res = static_cast<u16>(r1) - static_cast<u16>(r2) - carry;
+
+    setZ(static_cast<u8>(res) == 0);
+    setN(1);
+    setH((r1 & 0xF) < (r2 & 0xF) + carry);
+    setC((static_cast<u16>(r1) < static_cast<u16>(r2) + carry));
+
+    r1 = static_cast<u8>(res);
+}
+
+void CPU::and8(u8& r1, u8 r2) {
+    r1 &= r2;
+    setZ(r1 == 0);
+    setN(0);
+    setH(1);
+    setC(0);
+}
+
+void CPU::xor8(u8& r1, u8 r2) {
+    r1 ^= r2;
+    setZ(r1 == 0);
+    setN(0);
+    setH(0);
+    setC(0);
+}
+
+void CPU::or8(u8& r1, u8 r2) {
+    r1 |= r2;
+    setZ(r1 == 0);
+    setN(0);
+    setH(0);
+    setC(0);
+}
+
+void CPU::cp8(u8 r1, u8 r2) {
+    u16 res = static_cast<u16>(r1) - static_cast<u16>(r2);
+
+    setZ(static_cast<u8>(res) == 0);
+    setN(1);
+    setH((r1 & 0xF) < (r2 & 0xF));
+    setC(r1 < r2);
 }
 
 u32 CPU::Instruction::execute(CPU* cpu) const {
@@ -218,7 +354,7 @@ void CPU::step() {
     if (opcode == 0xCB) {
         opcode = mmu->read8(pc);
         pc++;
-        instr = cbOpcodes[opcode];
+        instr = extOpcodes[opcode];
     }
     else {
         instr = opcodes[opcode];

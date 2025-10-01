@@ -38,9 +38,15 @@ public:
 
     void inc8(u8& r);
     void dec8(u8& r);
-    void add8(u8& r1, u8 r2);
     void add16(u16& r1, u16 r2);
-    void ldRegToReg(u8& dst, u8 src);
+    void add8(u8& r1, u8 r2);
+    void adc8(u8& r1, u8 r2);
+    void sub8(u8& r1, u8 r2);
+    void sbc8(u8& r1, u8 r2);
+    void and8(u8& r1, u8 r2);
+    void xor8(u8& r1, u8 r2);
+    void or8(u8& r1, u8 r2);
+    void cp8(u8 r1, u8 r2);
 
     struct Instruction {
         string name = "UND";
@@ -123,76 +129,76 @@ public:
     u32 OP_CCF();
 
     // 0x40 - 0x4F
-    u32 OP_LD_B_B() { regs.b = regs.b; return 4; }
-    u32 OP_LD_B_C() { regs.b = regs.c; return 4; }
-    u32 OP_LD_B_D() { regs.b = regs.d; return 4; }
-    u32 OP_LD_B_E() { regs.b = regs.e; return 4; }
-    u32 OP_LD_B_H() { regs.b = regs.h; return 4; }
-    u32 OP_LD_B_L() { regs.b = regs.l; return 4; }
-    u32 OP_LD_B_HL() { regs.b = mmu->read8(regs.hl); return 8; }
-    u32 OP_LD_B_A() { regs.b = regs.a; return 4; }
-    u32 OP_LD_C_B() { regs.c = regs.b; return 4; }
-    u32 OP_LD_C_C() { regs.c = regs.c; return 4; }
-    u32 OP_LD_C_D() { regs.c = regs.d; return 4; }
-    u32 OP_LD_C_E() { regs.c = regs.e; return 4; }
-    u32 OP_LD_C_H() { regs.c = regs.h; return 4; }
-    u32 OP_LD_C_L() { regs.c = regs.l; return 4; }
-    u32 OP_LD_C_HL() { regs.c = mmu->read8(regs.hl); return 8; }
-    u32 OP_LD_C_A() { regs.c = regs.a; return 4; }
+    u32 OP_LD_B_B();
+    u32 OP_LD_B_C();
+    u32 OP_LD_B_D();
+    u32 OP_LD_B_E();
+    u32 OP_LD_B_H();
+    u32 OP_LD_B_L();
+    u32 OP_LD_B_HL();
+    u32 OP_LD_B_A();
+    u32 OP_LD_C_B();
+    u32 OP_LD_C_C();
+    u32 OP_LD_C_D();
+    u32 OP_LD_C_E();
+    u32 OP_LD_C_H();
+    u32 OP_LD_C_L();
+    u32 OP_LD_C_HL();
+    u32 OP_LD_C_A();
 
     // 0x50 - 0x5F
-    u32 OP_LD_D_B() { regs.d = regs.b; return 4; }
-    u32 OP_LD_D_C() { regs.d = regs.c; return 4; }
-    u32 OP_LD_D_D() { regs.d = regs.d; return 4; }
-    u32 OP_LD_D_E() { regs.d = regs.e; return 4; }
-    u32 OP_LD_D_H() { regs.d = regs.h; return 4; }
-    u32 OP_LD_D_L() { regs.d = regs.l; return 4; }
-    u32 OP_LD_D_HL() { regs.d = mmu->read8(regs.hl); return 8; }
-    u32 OP_LD_D_A() { regs.d = regs.a; return 4; }
-    u32 OP_LD_E_B() { regs.e = regs.b; return 4; }
-    u32 OP_LD_E_C() { regs.e = regs.c; return 4; }
-    u32 OP_LD_E_D() { regs.e = regs.d; return 4; }
-    u32 OP_LD_E_E() { regs.e = regs.e; return 4; }
-    u32 OP_LD_E_H() { regs.e = regs.h; return 4; }
-    u32 OP_LD_E_L() { regs.e = regs.l; return 4; }
-    u32 OP_LD_E_HL() { regs.e = mmu->read8(regs.hl); return 8; }
-    u32 OP_LD_E_A() { regs.e = regs.a; return 4; }
+    u32 OP_LD_D_B();
+    u32 OP_LD_D_C();
+    u32 OP_LD_D_D();
+    u32 OP_LD_D_E();
+    u32 OP_LD_D_H();
+    u32 OP_LD_D_L();
+    u32 OP_LD_D_HL();
+    u32 OP_LD_D_A();
+    u32 OP_LD_E_B();
+    u32 OP_LD_E_C();
+    u32 OP_LD_E_D();
+    u32 OP_LD_E_E();
+    u32 OP_LD_E_H();
+    u32 OP_LD_E_L();
+    u32 OP_LD_E_HL();
+    u32 OP_LD_E_A();
 
     // 0x60 - 0x6F
-    u32 OP_LD_H_B() { regs.h = regs.b; return 4; }
-    u32 OP_LD_H_C() { regs.h = regs.c; return 4; }
-    u32 OP_LD_H_D() { regs.h = regs.d; return 4; }
-    u32 OP_LD_H_E() { regs.h = regs.e; return 4; }
-    u32 OP_LD_H_H() { regs.h = regs.h; return 4; }
-    u32 OP_LD_H_L() { regs.h = regs.l; return 4; }
-    u32 OP_LD_H_HL() { regs.h = mmu->read8(regs.hl); return 8; }
-    u32 OP_LD_H_A() { regs.h = regs.a; return 4; }
-    u32 OP_LD_L_B() { regs.l = regs.b; return 4; }
-    u32 OP_LD_L_C() { regs.l = regs.c; return 4; }
-    u32 OP_LD_L_D() { regs.l = regs.d; return 4; }
-    u32 OP_LD_L_E() { regs.l = regs.e; return 4; }
-    u32 OP_LD_L_H() { regs.l = regs.h; return 4; }
-    u32 OP_LD_L_L() { regs.l = regs.l; return 4; }
-    u32 OP_LD_L_HL() { regs.l = mmu->read8(regs.hl); return 8; }
-    u32 OP_LD_L_A() { regs.l = regs.a; return 4; }
+    u32 OP_LD_H_B();
+    u32 OP_LD_H_C();
+    u32 OP_LD_H_D();
+    u32 OP_LD_H_E();
+    u32 OP_LD_H_H();
+    u32 OP_LD_H_L();
+    u32 OP_LD_H_HL();
+    u32 OP_LD_H_A();
+    u32 OP_LD_L_B();
+    u32 OP_LD_L_C();
+    u32 OP_LD_L_D();
+    u32 OP_LD_L_E();
+    u32 OP_LD_L_H();
+    u32 OP_LD_L_L();
+    u32 OP_LD_L_HL();
+    u32 OP_LD_L_A();
 
     // 0x70 - 0x7F
-    u32 OP_LD_HL_B() { mmu->write8(regs.hl, regs.b); return 8; }
-    u32 OP_LD_HL_C() { mmu->write8(regs.hl, regs.c); return 8; }
-    u32 OP_LD_HL_D() { mmu->write8(regs.hl, regs.d); return 8; }
-    u32 OP_LD_HL_E() { mmu->write8(regs.hl, regs.e); return 8; }
-    u32 OP_LD_HL_H() { mmu->write8(regs.hl, regs.h); return 8; }
-    u32 OP_LD_HL_L() { mmu->write8(regs.hl, regs.l); return 8; }
-    u32 OP_HALT(); // FIXME
-    u32 OP_LD_HL_A() { mmu->write8(regs.hl, regs.a); return 8; }
-    u32 OP_LD_A_B() { regs.a = regs.b; return 4; }
-    u32 OP_LD_A_C() { regs.a = regs.c; return 4; }
-    u32 OP_LD_A_D() { regs.a = regs.d; return 4; }
-    u32 OP_LD_A_E() { regs.a = regs.e; return 4; }
-    u32 OP_LD_A_H() { regs.a = regs.h; return 4; }
-    u32 OP_LD_A_L() { regs.a = regs.l; return 4; }
-    u32 OP_LD_A_HL() { regs.a = mmu->read8(regs.hl); return 8; }
-    u32 OP_LD_A_A() { regs.a = regs.a; return 4; }
+    u32 OP_LD_HL_B();
+    u32 OP_LD_HL_C();
+    u32 OP_LD_HL_D();
+    u32 OP_LD_HL_E();
+    u32 OP_LD_HL_H();
+    u32 OP_LD_HL_L();
+    u32 OP_HALT();
+    u32 OP_LD_HL_A();
+    u32 OP_LD_A_B();
+    u32 OP_LD_A_C();
+    u32 OP_LD_A_D();
+    u32 OP_LD_A_E();
+    u32 OP_LD_A_H();
+    u32 OP_LD_A_L();
+    u32 OP_LD_A_HL();
+    u32 OP_LD_A_A();
 
     // 0x80-0x8F
     u32 OP_ADD_A_B();
@@ -630,5 +636,5 @@ public:
 private:
     MMU* mmu;
     array<Instruction, 256> opcodes;
-    array<Instruction, 256> cbOpcodes;
+    array<Instruction, 256> extOpcodes;
 };

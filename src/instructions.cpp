@@ -389,14 +389,161 @@ u32 CPU::OP_CCF() {
     return 4;
 }
 
-u32 CPU::OP_HALT() {
+// 0x40 - 0x4F
+u32 CPU::OP_LD_B_B() { regs.b = regs.b; return 4; }
+u32 CPU::OP_LD_B_C() { regs.b = regs.c; return 4; }
+u32 CPU::OP_LD_B_D() { regs.b = regs.d; return 4; }
+u32 CPU::OP_LD_B_E() { regs.b = regs.e; return 4; }
+u32 CPU::OP_LD_B_H() { regs.b = regs.h; return 4; }
+u32 CPU::OP_LD_B_L() { regs.b = regs.l; return 4; }
+u32 CPU::OP_LD_B_HL() { regs.b = mmu->read8(regs.hl); return 8; }
+u32 CPU::OP_LD_B_A() { regs.b = regs.a; return 4; }
+u32 CPU::OP_LD_C_B() { regs.c = regs.b; return 4; }
+u32 CPU::OP_LD_C_C() { regs.c = regs.c; return 4; }
+u32 CPU::OP_LD_C_D() { regs.c = regs.d; return 4; }
+u32 CPU::OP_LD_C_E() { regs.c = regs.e; return 4; }
+u32 CPU::OP_LD_C_H() { regs.c = regs.h; return 4; }
+u32 CPU::OP_LD_C_L() { regs.c = regs.l; return 4; }
+u32 CPU::OP_LD_C_HL() { regs.c = mmu->read8(regs.hl); return 8; }
+u32 CPU::OP_LD_C_A() { regs.c = regs.a; return 4; }
 
-    return 4;
+// 0x50 - 0x5F
+u32 CPU::OP_LD_D_B() { regs.d = regs.b; return 4; }
+u32 CPU::OP_LD_D_C() { regs.d = regs.c; return 4; }
+u32 CPU::OP_LD_D_D() { regs.d = regs.d; return 4; }
+u32 CPU::OP_LD_D_E() { regs.d = regs.e; return 4; }
+u32 CPU::OP_LD_D_H() { regs.d = regs.h; return 4; }
+u32 CPU::OP_LD_D_L() { regs.d = regs.l; return 4; }
+u32 CPU::OP_LD_D_HL() { regs.d = mmu->read8(regs.hl); return 8; }
+u32 CPU::OP_LD_D_A() { regs.d = regs.a; return 4; }
+u32 CPU::OP_LD_E_B() { regs.e = regs.b; return 4; }
+u32 CPU::OP_LD_E_C() { regs.e = regs.c; return 4; }
+u32 CPU::OP_LD_E_D() { regs.e = regs.d; return 4; }
+u32 CPU::OP_LD_E_E() { regs.e = regs.e; return 4; }
+u32 CPU::OP_LD_E_H() { regs.e = regs.h; return 4; }
+u32 CPU::OP_LD_E_L() { regs.e = regs.l; return 4; }
+u32 CPU::OP_LD_E_HL() { regs.e = mmu->read8(regs.hl); return 8; }
+u32 CPU::OP_LD_E_A() { regs.e = regs.a; return 4; }
+
+// 0x60 - 0x6F
+u32 CPU::OP_LD_H_B() { regs.h = regs.b; return 4; }
+u32 CPU::OP_LD_H_C() { regs.h = regs.c; return 4; }
+u32 CPU::OP_LD_H_D() { regs.h = regs.d; return 4; }
+u32 CPU::OP_LD_H_E() { regs.h = regs.e; return 4; }
+u32 CPU::OP_LD_H_H() { regs.h = regs.h; return 4; }
+u32 CPU::OP_LD_H_L() { regs.h = regs.l; return 4; }
+u32 CPU::OP_LD_H_HL() { regs.h = mmu->read8(regs.hl); return 8; }
+u32 CPU::OP_LD_H_A() { regs.h = regs.a; return 4; }
+u32 CPU::OP_LD_L_B() { regs.l = regs.b; return 4; }
+u32 CPU::OP_LD_L_C() { regs.l = regs.c; return 4; }
+u32 CPU::OP_LD_L_D() { regs.l = regs.d; return 4; }
+u32 CPU::OP_LD_L_E() { regs.l = regs.e; return 4; }
+u32 CPU::OP_LD_L_H() { regs.l = regs.h; return 4; }
+u32 CPU::OP_LD_L_L() { regs.l = regs.l; return 4; }
+u32 CPU::OP_LD_L_HL() { regs.l = mmu->read8(regs.hl); return 8; }
+u32 CPU::OP_LD_L_A() { regs.l = regs.a; return 4; }
+
+// 0x70 - 0x7F
+u32 CPU::OP_LD_HL_B() { mmu->write8(regs.hl, regs.b); return 8; }
+u32 CPU::OP_LD_HL_C() { mmu->write8(regs.hl, regs.c); return 8; }
+u32 CPU::OP_LD_HL_D() { mmu->write8(regs.hl, regs.d); return 8; }
+u32 CPU::OP_LD_HL_E() { mmu->write8(regs.hl, regs.e); return 8; }
+u32 CPU::OP_LD_HL_H() { mmu->write8(regs.hl, regs.h); return 8; }
+u32 CPU::OP_LD_HL_L() { mmu->write8(regs.hl, regs.l); return 8; }
+u32 CPU::OP_HALT() { return 4; }; // FIXME
+u32 CPU::OP_LD_HL_A() { mmu->write8(regs.hl, regs.a); return 8; }
+u32 CPU::OP_LD_A_B() { regs.a = regs.b; return 4; }
+u32 CPU::OP_LD_A_C() { regs.a = regs.c; return 4; }
+u32 CPU::OP_LD_A_D() { regs.a = regs.d; return 4; }
+u32 CPU::OP_LD_A_E() { regs.a = regs.e; return 4; }
+u32 CPU::OP_LD_A_H() { regs.a = regs.h; return 4; }
+u32 CPU::OP_LD_A_L() { regs.a = regs.l; return 4; }
+u32 CPU::OP_LD_A_HL() { regs.a = mmu->read8(regs.hl); return 8; }
+u32 CPU::OP_LD_A_A() { regs.a = regs.a; return 4; }
+
+// 0x80-0x8F
+u32 CPU::OP_ADD_A_B() { add8(regs.a, regs.b); return 4; }
+u32 CPU::OP_ADD_A_C() { add8(regs.a, regs.c); return 4; }
+u32 CPU::OP_ADD_A_D() { add8(regs.a, regs.d); return 4; }
+u32 CPU::OP_ADD_A_E() { add8(regs.a, regs.e); return 4; }
+u32 CPU::OP_ADD_A_H() { add8(regs.a, regs.h); return 4; }
+u32 CPU::OP_ADD_A_L() { add8(regs.a, regs.l); return 4; }
+u32 CPU::OP_ADD_A_HL() { add8(regs.a, mmu->read8(regs.hl)); return 8; }
+u32 CPU::OP_ADD_A_A() { add8(regs.a, regs.a); return 4; }
+u32 CPU::OP_ADC_A_B() { adc8(regs.a, regs.b); return 4; }
+u32 CPU::OP_ADC_A_C() { adc8(regs.a, regs.c); return 4; }
+u32 CPU::OP_ADC_A_D() { adc8(regs.a, regs.d); return 4; }
+u32 CPU::OP_ADC_A_E() { adc8(regs.a, regs.e); return 4; }
+u32 CPU::OP_ADC_A_H() { adc8(regs.a, regs.h); return 4; }
+u32 CPU::OP_ADC_A_L() { adc8(regs.a, regs.l); return 4; }
+u32 CPU::OP_ADC_A_HL() { adc8(regs.a, mmu->read8(regs.hl)); return 8; }
+u32 CPU::OP_ADC_A_A() { adc8(regs.a, regs.a); return 4; }
+
+// 0x90-0x9F
+u32 CPU::OP_SUB_B() { sub8(regs.a, regs.b); return 4; }
+u32 CPU::OP_SUB_C() { sub8(regs.a, regs.c); return 4; }
+u32 CPU::OP_SUB_D() { sub8(regs.a, regs.d); return 4; }
+u32 CPU::OP_SUB_E() { sub8(regs.a, regs.e); return 4; }
+u32 CPU::OP_SUB_H() { sub8(regs.a, regs.h); return 4; }
+u32 CPU::OP_SUB_L() { sub8(regs.a, regs.l); return 4; }
+u32 CPU::OP_SUB_HL() { sub8(regs.a, mmu->read8(regs.hl)); return 8; }
+u32 CPU::OP_SUB_A() { sub8(regs.a, regs.a); return 4; }
+u32 CPU::OP_SBC_A_B() { sbc8(regs.a, regs.b); return 4; }
+u32 CPU::OP_SBC_A_C() { sbc8(regs.a, regs.c); return 4; }
+u32 CPU::OP_SBC_A_D() { sbc8(regs.a, regs.d); return 4; }
+u32 CPU::OP_SBC_A_E() { sbc8(regs.a, regs.e); return 4; }
+u32 CPU::OP_SBC_A_H() { sbc8(regs.a, regs.h); return 4; }
+u32 CPU::OP_SBC_A_L() { sbc8(regs.a, regs.l); return 4; }
+u32 CPU::OP_SBC_A_HL() { sbc8(regs.a, mmu->read8(regs.hl)); return 8; }
+u32 CPU::OP_SBC_A_A() { sbc8(regs.a, regs.a); return 4; }
+
+// 0xA0-0xAF
+u32 CPU::OP_AND_B() { and8(regs.a, regs.b); return 4; }
+u32 CPU::OP_AND_C() { and8(regs.a, regs.c); return 4; }
+u32 CPU::OP_AND_D() { and8(regs.a, regs.d); return 4; }
+u32 CPU::OP_AND_E() { and8(regs.a, regs.e); return 4; }
+u32 CPU::OP_AND_H() { and8(regs.a, regs.h); return 4; }
+u32 CPU::OP_AND_L() { and8(regs.a, regs.l); return 4; }
+u32 CPU::OP_AND_HL() { and8(regs.a, mmu->read8(regs.hl)); return 8; }
+u32 CPU::OP_AND_A() { and8(regs.a, regs.a); return 4; }
+u32 CPU::OP_XOR_B() { xor8(regs.a, regs.b); return 4; }
+u32 CPU::OP_XOR_C() { xor8(regs.a, regs.c); return 4; }
+u32 CPU::OP_XOR_D() { xor8(regs.a, regs.d); return 4; }
+u32 CPU::OP_XOR_E() { xor8(regs.a, regs.e); return 4; }
+u32 CPU::OP_XOR_H() { xor8(regs.a, regs.h); return 4; }
+u32 CPU::OP_XOR_L() { xor8(regs.a, regs.l); return 4; }
+u32 CPU::OP_XOR_HL() { xor8(regs.a, mmu->read8(regs.hl)); return 8; }
+u32 CPU::OP_XOR_A() { xor8(regs.a, regs.a); return 4; }
+
+// 0xB0-0xBF
+u32 CPU::OP_OR_B() { or8(regs.a, regs.b); return 4; }
+u32 CPU::OP_OR_C() { or8(regs.a, regs.c); return 4; }
+u32 CPU::OP_OR_D() { or8(regs.a, regs.d); return 4; }
+u32 CPU::OP_OR_E() { or8(regs.a, regs.e); return 4; }
+u32 CPU::OP_OR_H() { or8(regs.a, regs.h); return 4; }
+u32 CPU::OP_OR_L() { or8(regs.a, regs.l); return 4; }
+u32 CPU::OP_OR_HL() { or8(regs.a, mmu->read8(regs.hl)); return 8; }
+u32 CPU::OP_OR_A() { or8(regs.a, regs.a); return 4; }
+u32 CPU::OP_CP_B() { cp8(regs.a, regs.b); return 4; }
+u32 CPU::OP_CP_C() { cp8(regs.a, regs.c); return 4; }
+u32 CPU::OP_CP_D() { cp8(regs.a, regs.d); return 4; }
+u32 CPU::OP_CP_E() { cp8(regs.a, regs.e); return 4; }
+u32 CPU::OP_CP_H() { cp8(regs.a, regs.h); return 4; }
+u32 CPU::OP_CP_L() { cp8(regs.a, regs.l); return 4; }
+u32 CPU::OP_CP_HL() { cp8(regs.a, mmu->read8(regs.hl)); return 8; }
+u32 CPU::OP_CP_A() { cp8(regs.a, regs.a); return 4; }
+
+u32 CPU::OP_RET_NZ() {
+    return 0;
 }
 
+u32 CPU::OP_POP_BC() {
+    return 12;
+}
 
-
-
+u32 CPU::OP_JP_NZ_a16() {
+    return 0;
+}
 
 u32 CPU::OP_JP_a16() {
     pc = peek16();
