@@ -77,9 +77,73 @@ CPU::CPU(MMU* mmu) {
     opcodes[0x3D] = {"DEC A",        &CPU::OP_DEC_A};
     opcodes[0x3E] = {"LD A, d8",     &CPU::OP_LD_A_d8};
     opcodes[0x3F] = {"CCF",          &CPU::OP_CCF};
+    opcodes[0x40] = {"LD B, B",      &CPU::OP_LD_B_B};
+    opcodes[0x41] = {"LD B, C",      &CPU::OP_LD_B_C};
+    opcodes[0x42] = {"LD B, D",      &CPU::OP_LD_B_D};
+    opcodes[0x43] = {"LD B, E",      &CPU::OP_LD_B_E};
+    opcodes[0x44] = {"LD B, H",      &CPU::OP_LD_B_H};
+    opcodes[0x45] = {"LD B, L",      &CPU::OP_LD_B_L};
+    opcodes[0x46] = {"LD B, (HL)",   &CPU::OP_LD_B_HL};
+    opcodes[0x47] = {"LD B, A",      &CPU::OP_LD_B_A};
+    opcodes[0x48] = {"LD C, B",      &CPU::OP_LD_C_B};
+    opcodes[0x49] = {"LD C, C",      &CPU::OP_LD_C_C};
+    opcodes[0x4A] = {"LD C, D",      &CPU::OP_LD_C_D};
+    opcodes[0x4B] = {"LD C, E",      &CPU::OP_LD_C_E};
+    opcodes[0x4C] = {"LD C, H",      &CPU::OP_LD_C_H};
+    opcodes[0x4D] = {"LD C, L",      &CPU::OP_LD_C_L};
+    opcodes[0x4E] = {"LD C, (HL)",   &CPU::OP_LD_C_HL};
+    opcodes[0x4F] = {"LD C, A",      &CPU::OP_LD_C_A};
+    opcodes[0x50] = {"LD D, B",      &CPU::OP_LD_D_B};
+    opcodes[0x51] = {"LD D, C",      &CPU::OP_LD_D_C};
+    opcodes[0x52] = {"LD D, D",      &CPU::OP_LD_D_D};
+    opcodes[0x53] = {"LD D, E",      &CPU::OP_LD_D_E};
+    opcodes[0x54] = {"LD D, H",      &CPU::OP_LD_D_H};
+    opcodes[0x55] = {"LD D, L",      &CPU::OP_LD_D_L};
+    opcodes[0x56] = {"LD D, (HL)",   &CPU::OP_LD_D_HL};
+    opcodes[0x57] = {"LD D, A",      &CPU::OP_LD_D_A};
+    opcodes[0x58] = {"LD E, B",      &CPU::OP_LD_E_B};
+    opcodes[0x59] = {"LD E, C",      &CPU::OP_LD_E_C};
+    opcodes[0x5A] = {"LD E, D",      &CPU::OP_LD_E_D};
+    opcodes[0x5B] = {"LD E, E",      &CPU::OP_LD_E_E};
+    opcodes[0x5C] = {"LD E, H",      &CPU::OP_LD_E_H};
+    opcodes[0x5D] = {"LD E, L",      &CPU::OP_LD_E_L};
+    opcodes[0x5E] = {"LD E, (HL)",   &CPU::OP_LD_E_HL};
+    opcodes[0x5F] = {"LD E, A",      &CPU::OP_LD_E_A};
+    opcodes[0x60] = {"LD H, B",      &CPU::OP_LD_H_B};
+    opcodes[0x61] = {"LD H, C",      &CPU::OP_LD_H_C};
+    opcodes[0x62] = {"LD H, D",      &CPU::OP_LD_H_D};
+    opcodes[0x63] = {"LD H, E",      &CPU::OP_LD_H_E};
+    opcodes[0x64] = {"LD H, H",      &CPU::OP_LD_H_H};
+    opcodes[0x65] = {"LD H, L",      &CPU::OP_LD_H_L};
+    opcodes[0x66] = {"LD H, (HL)",   &CPU::OP_LD_H_HL};
+    opcodes[0x67] = {"LD H, A",      &CPU::OP_LD_H_A};
+    opcodes[0x68] = {"LD L, B",      &CPU::OP_LD_L_B};
+    opcodes[0x69] = {"LD L, C",      &CPU::OP_LD_L_C};
+    opcodes[0x6A] = {"LD L, D",      &CPU::OP_LD_L_D};
+    opcodes[0x6B] = {"LD L, E",      &CPU::OP_LD_L_E};
+    opcodes[0x6C] = {"LD L, H",      &CPU::OP_LD_L_H};
+    opcodes[0x6D] = {"LD L, L",      &CPU::OP_LD_L_L};
+    opcodes[0x6E] = {"LD L, (HL)",   &CPU::OP_LD_L_HL};
+    opcodes[0x6F] = {"LD L, A",      &CPU::OP_LD_L_A};
+    opcodes[0x70] = {"LD (HL), B",   &CPU::OP_LD_HL_B};
+    opcodes[0x71] = {"LD (HL), C",   &CPU::OP_LD_HL_C};
+    opcodes[0x72] = {"LD (HL), D",   &CPU::OP_LD_HL_D};
+    opcodes[0x73] = {"LD (HL), E",   &CPU::OP_LD_HL_E};
+    opcodes[0x74] = {"LD (HL), H",   &CPU::OP_LD_HL_H};
+    opcodes[0x75] = {"LD (HL), L",   &CPU::OP_LD_HL_L};
+    opcodes[0x76] = {"HALT",         &CPU::OP_HALT};
+    opcodes[0x77] = {"LD (HL), A",   &CPU::OP_LD_HL_A};
+    opcodes[0x78] = {"LD A, B",      &CPU::OP_LD_A_B};
+    opcodes[0x79] = {"LD A, C",      &CPU::OP_LD_A_C};
+    opcodes[0x7A] = {"LD A, D",      &CPU::OP_LD_A_D};
+    opcodes[0x7B] = {"LD A, E",      &CPU::OP_LD_A_E};
+    opcodes[0x7C] = {"LD A, H",      &CPU::OP_LD_A_H};
+    opcodes[0x7D] = {"LD A, L",      &CPU::OP_LD_A_L};
+    opcodes[0x7E] = {"LD A, (HL)",   &CPU::OP_LD_A_HL};
+    opcodes[0x7F] = {"LD A, A",      &CPU::OP_LD_A_A};
 
     // Example later instruction
-    opcodes[0xC3] = {"JP a16",      &CPU::OP_JP_a16};
+    opcodes[0xC3] = {"JP a16",       &CPU::OP_JP_a16};
 }
 
 u8 CPU::fetch8() {
@@ -118,7 +182,7 @@ void CPU::dec8(u8& r) {
     setN(1);
 }
 
-void CPU::add8(u8& r1, u8& r2) {
+void CPU::add8(u8& r1, u8 r2) {
     
 }
 
@@ -130,6 +194,10 @@ void CPU::add16(u16& r1, u16 r2) {
     setC(res > 0xFFFF);
 
     r1 = static_cast<u16>(res);
+}
+
+void CPU::ldRegToReg(u8& dst, u8 src) {
+    dst = src;
 }
 
 u32 CPU::Instruction::execute(CPU* cpu) const {

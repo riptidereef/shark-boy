@@ -389,6 +389,11 @@ u32 CPU::OP_CCF() {
     return 4;
 }
 
+u32 CPU::OP_HALT() {
+
+    return 4;
+}
+
 
 
 
