@@ -47,6 +47,17 @@ public:
     void xor8(u8& r1, u8 r2);
     void or8(u8& r1, u8 r2);
     void cp8(u8 r1, u8 r2);
+    void rlc8(u8& reg);
+    void rrc8(u8& reg);
+    void rl8(u8& reg);
+    void rr8(u8& reg);
+    void sla8(u8& reg);
+    void sra8(u8& reg);
+    void swap8(u8& reg);
+    void srl8(u8& reg);
+    void bit8(u8 bit, u8 val);
+    void res8(u8 bit, u8& reg);
+    void set8(u8 bit, u8& reg);
 
     struct Instruction {
         string name = "UND";
@@ -451,7 +462,7 @@ public:
     u32 OP_BIT_3_H();
     u32 OP_BIT_3_L();
     u32 OP_BIT_3_HL();
-    u32 BIT_3_A();
+    u32 OP_BIT_3_A();
 
     // CB 0x60–0x6F
     u32 OP_BIT_4_B();

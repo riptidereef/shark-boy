@@ -269,6 +269,263 @@ CPU::CPU(MMU* mmu) {
     opcodes[0xFD] = {"UND FD",       &CPU::OP_UNDEFINED_FD};
     opcodes[0xFE] = {"CP d8",        &CPU::OP_CP_d8};
     opcodes[0xFF] = {"RST 38H",      &CPU::OP_RST_38H};
+
+    extOpcodes[0x00] = {"RLC B",        &CPU::OP_RLC_B};
+    extOpcodes[0x01] = {"RLC C",        &CPU::OP_RLC_C};
+    extOpcodes[0x02] = {"RLC D",        &CPU::OP_RLC_D};
+    extOpcodes[0x03] = {"RLC E",        &CPU::OP_RLC_E};
+    extOpcodes[0x04] = {"RLC H",        &CPU::OP_RLC_H};
+    extOpcodes[0x05] = {"RLC L",        &CPU::OP_RLC_L};
+    extOpcodes[0x06] = {"RLC (HL)",     &CPU::OP_RLC_HL};
+    extOpcodes[0x07] = {"RLC A",        &CPU::OP_RLC_A};
+    extOpcodes[0x08] = {"RRC B",        &CPU::OP_RRC_B};
+    extOpcodes[0x09] = {"RRC C",        &CPU::OP_RRC_C};
+    extOpcodes[0x0A] = {"RRC D",        &CPU::OP_RRC_D};
+    extOpcodes[0x0B] = {"RRC E",        &CPU::OP_RRC_E};
+    extOpcodes[0x0C] = {"RRC H",        &CPU::OP_RRC_H};
+    extOpcodes[0x0D] = {"RRC L",        &CPU::OP_RRC_L};
+    extOpcodes[0x0E] = {"RRC (HL)",     &CPU::OP_RRC_HL};
+    extOpcodes[0x0F] = {"RRC A",        &CPU::OP_RRC_A};
+    extOpcodes[0x10] = {"RL B",         &CPU::OP_RL_B};
+    extOpcodes[0x11] = {"RL C",         &CPU::OP_RL_C};
+    extOpcodes[0x12] = {"RL D",         &CPU::OP_RL_D};
+    extOpcodes[0x13] = {"RL E",         &CPU::OP_RL_E};
+    extOpcodes[0x14] = {"RL H",         &CPU::OP_RL_H};
+    extOpcodes[0x15] = {"RL L",         &CPU::OP_RL_L};
+    extOpcodes[0x16] = {"RL (HL)",      &CPU::OP_RL_HL};
+    extOpcodes[0x17] = {"RL A",         &CPU::OP_RL_A};
+    extOpcodes[0x18] = {"RR B",         &CPU::OP_RR_B};
+    extOpcodes[0x19] = {"RR C",         &CPU::OP_RR_C};
+    extOpcodes[0x1A] = {"RR D",         &CPU::OP_RR_D};
+    extOpcodes[0x1B] = {"RR E",         &CPU::OP_RR_E};
+    extOpcodes[0x1C] = {"RR H",         &CPU::OP_RR_H};
+    extOpcodes[0x1D] = {"RR L",         &CPU::OP_RR_L};
+    extOpcodes[0x1E] = {"RR (HL)",      &CPU::OP_RR_HL};
+    extOpcodes[0x1F] = {"RR A",         &CPU::OP_RR_A};
+    extOpcodes[0x20] = {"SLA B",        &CPU::OP_SLA_B};
+    extOpcodes[0x21] = {"SLA C",        &CPU::OP_SLA_C};
+    extOpcodes[0x22] = {"SLA D",        &CPU::OP_SLA_D};
+    extOpcodes[0x23] = {"SLA E",        &CPU::OP_SLA_E};
+    extOpcodes[0x24] = {"SLA H",        &CPU::OP_SLA_H};
+    extOpcodes[0x25] = {"SLA L",        &CPU::OP_SLA_L};
+    extOpcodes[0x26] = {"SLA (HL)",     &CPU::OP_SLA_HL};
+    extOpcodes[0x27] = {"SLA A",        &CPU::OP_SLA_A};
+    extOpcodes[0x28] = {"SRA B",        &CPU::OP_SRA_B};
+    extOpcodes[0x29] = {"SRA C",        &CPU::OP_SRA_C};
+    extOpcodes[0x2A] = {"SRA D",        &CPU::OP_SRA_D};
+    extOpcodes[0x2B] = {"SRA E",        &CPU::OP_SRA_E};
+    extOpcodes[0x2C] = {"SRA H",        &CPU::OP_SRA_H};
+    extOpcodes[0x2D] = {"SRA L",        &CPU::OP_SRA_L};
+    extOpcodes[0x2E] = {"SRA (HL)",     &CPU::OP_SRA_HL};
+    extOpcodes[0x2F] = {"SRA A",        &CPU::OP_SRA_A};
+    extOpcodes[0x30] = {"SWAP B",       &CPU::OP_SWAP_B};
+    extOpcodes[0x31] = {"SWAP C",       &CPU::OP_SWAP_C};
+    extOpcodes[0x32] = {"SWAP D",       &CPU::OP_SWAP_D};
+    extOpcodes[0x33] = {"SWAP E",       &CPU::OP_SWAP_E};
+    extOpcodes[0x34] = {"SWAP H",       &CPU::OP_SWAP_H};
+    extOpcodes[0x35] = {"SWAP L",       &CPU::OP_SWAP_L};
+    extOpcodes[0x36] = {"SWAP (HL)",    &CPU::OP_SWAP_HL};
+    extOpcodes[0x37] = {"SWAP A",       &CPU::OP_SWAP_A};
+    extOpcodes[0x38] = {"SRL B",        &CPU::OP_SRL_B};
+    extOpcodes[0x39] = {"SRL C",        &CPU::OP_SRL_C};
+    extOpcodes[0x3A] = {"SRL D",        &CPU::OP_SRL_D};
+    extOpcodes[0x3B] = {"SRL E",        &CPU::OP_SRL_E};
+    extOpcodes[0x3C] = {"SRL H",        &CPU::OP_SRL_H};
+    extOpcodes[0x3D] = {"SRL L",        &CPU::OP_SRL_L};
+    extOpcodes[0x3E] = {"SRL (HL)",     &CPU::OP_SRL_HL};
+    extOpcodes[0x3F] = {"SRL A",        &CPU::OP_SRL_A};
+    extOpcodes[0x40] = {"BIT 0, B",     &CPU::OP_BIT_0_B};
+    extOpcodes[0x41] = {"BIT 0, C",     &CPU::OP_BIT_0_C};
+    extOpcodes[0x42] = {"BIT 0, D",     &CPU::OP_BIT_0_D};
+    extOpcodes[0x43] = {"BIT 0, E",     &CPU::OP_BIT_0_E};
+    extOpcodes[0x44] = {"BIT 0, H",     &CPU::OP_BIT_0_H};
+    extOpcodes[0x45] = {"BIT 0, L",     &CPU::OP_BIT_0_L};
+    extOpcodes[0x46] = {"BIT 0, (HL)",  &CPU::OP_BIT_0_HL};
+    extOpcodes[0x47] = {"BIT 0, A",     &CPU::OP_BIT_0_A};
+    extOpcodes[0x48] = {"BIT 1, B",     &CPU::OP_BIT_1_B};
+    extOpcodes[0x49] = {"BIT 1, C",     &CPU::OP_BIT_1_C};
+    extOpcodes[0x4A] = {"BIT 1, D",     &CPU::OP_BIT_1_D};
+    extOpcodes[0x4B] = {"BIT 1, E",     &CPU::OP_BIT_1_E};
+    extOpcodes[0x4C] = {"BIT 1, H",     &CPU::OP_BIT_1_H};
+    extOpcodes[0x4D] = {"BIT 1, L",     &CPU::OP_BIT_1_L};
+    extOpcodes[0x4E] = {"BIT 1, (HL)",  &CPU::OP_BIT_1_HL};
+    extOpcodes[0x4F] = {"BIT 1, A",     &CPU::OP_BIT_1_A};
+    extOpcodes[0x50] = {"BIT 2, B",     &CPU::OP_BIT_2_B};
+    extOpcodes[0x51] = {"BIT 2, C",     &CPU::OP_BIT_2_C};
+    extOpcodes[0x52] = {"BIT 2, D",     &CPU::OP_BIT_2_D};
+    extOpcodes[0x53] = {"BIT 2, E",     &CPU::OP_BIT_2_E};
+    extOpcodes[0x54] = {"BIT 2, H",     &CPU::OP_BIT_2_H};
+    extOpcodes[0x55] = {"BIT 2, L",     &CPU::OP_BIT_2_L};
+    extOpcodes[0x56] = {"BIT 2, (HL)",  &CPU::OP_BIT_2_HL};
+    extOpcodes[0x57] = {"BIT 2, A",     &CPU::OP_BIT_2_A};
+    extOpcodes[0x58] = {"BIT 3, B",     &CPU::OP_BIT_3_B};
+    extOpcodes[0x59] = {"BIT 3, C",     &CPU::OP_BIT_3_C};
+    extOpcodes[0x5A] = {"BIT 3, D",     &CPU::OP_BIT_3_D};
+    extOpcodes[0x5B] = {"BIT 3, E",     &CPU::OP_BIT_3_E};
+    extOpcodes[0x5C] = {"BIT 3, H",     &CPU::OP_BIT_3_H};
+    extOpcodes[0x5D] = {"BIT 3, L",     &CPU::OP_BIT_3_L};
+    extOpcodes[0x5E] = {"BIT 3, (HL)",  &CPU::OP_BIT_3_HL};
+    extOpcodes[0x5F] = {"BIT 3, A",     &CPU::OP_BIT_3_A};
+    extOpcodes[0x60] = {"BIT 4, B",     &CPU::OP_BIT_4_B};
+    extOpcodes[0x61] = {"BIT 4, C",     &CPU::OP_BIT_4_C};
+    extOpcodes[0x62] = {"BIT 4, D",     &CPU::OP_BIT_4_D};
+    extOpcodes[0x63] = {"BIT 4, E",     &CPU::OP_BIT_4_E};
+    extOpcodes[0x64] = {"BIT 4, H",     &CPU::OP_BIT_4_H};
+    extOpcodes[0x65] = {"BIT 4, L",     &CPU::OP_BIT_4_L};
+    extOpcodes[0x66] = {"BIT 4, (HL)",  &CPU::OP_BIT_4_HL};
+    extOpcodes[0x67] = {"BIT 4, A",     &CPU::OP_BIT_4_A};
+    extOpcodes[0x68] = {"BIT 5, B",     &CPU::OP_BIT_5_B};
+    extOpcodes[0x69] = {"BIT 5, C",     &CPU::OP_BIT_5_C};
+    extOpcodes[0x6A] = {"BIT 5, D",     &CPU::OP_BIT_5_D};
+    extOpcodes[0x6B] = {"BIT 5, E",     &CPU::OP_BIT_5_E};
+    extOpcodes[0x6C] = {"BIT 5, H",     &CPU::OP_BIT_5_H};
+    extOpcodes[0x6D] = {"BIT 5, L",     &CPU::OP_BIT_5_L};
+    extOpcodes[0x6E] = {"BIT 5, (HL)",  &CPU::OP_BIT_5_HL};
+    extOpcodes[0x6F] = {"BIT 5, A",     &CPU::OP_BIT_5_A};
+    extOpcodes[0x70] = {"BIT 6, B",     &CPU::OP_BIT_6_B};
+    extOpcodes[0x71] = {"BIT 6, C",     &CPU::OP_BIT_6_C};
+    extOpcodes[0x72] = {"BIT 6, D",     &CPU::OP_BIT_6_D};
+    extOpcodes[0x73] = {"BIT 6, E",     &CPU::OP_BIT_6_E};
+    extOpcodes[0x74] = {"BIT 6, H",     &CPU::OP_BIT_6_H};
+    extOpcodes[0x75] = {"BIT 6, L",     &CPU::OP_BIT_6_L};
+    extOpcodes[0x76] = {"BIT 6, (HL)",  &CPU::OP_BIT_6_HL};
+    extOpcodes[0x77] = {"BIT 6, A",     &CPU::OP_BIT_6_A};
+    extOpcodes[0x78] = {"BIT 7, B",     &CPU::OP_BIT_7_B};
+    extOpcodes[0x79] = {"BIT 7, C",     &CPU::OP_BIT_7_C};
+    extOpcodes[0x7A] = {"BIT 7, D",     &CPU::OP_BIT_7_D};
+    extOpcodes[0x7B] = {"BIT 7, E",     &CPU::OP_BIT_7_E};
+    extOpcodes[0x7C] = {"BIT 7, H",     &CPU::OP_BIT_7_H};
+    extOpcodes[0x7D] = {"BIT 7, L",     &CPU::OP_BIT_7_L};
+    extOpcodes[0x7E] = {"BIT 7, (HL)",  &CPU::OP_BIT_7_HL};
+    extOpcodes[0x7F] = {"BIT 7, A",     &CPU::OP_BIT_7_A};
+    extOpcodes[0x80] = {"RES 0, B",     &CPU::OP_RES_0_B};
+    extOpcodes[0x81] = {"RES 0, C",     &CPU::OP_RES_0_C};
+    extOpcodes[0x82] = {"RES 0, D",     &CPU::OP_RES_0_D};
+    extOpcodes[0x83] = {"RES 0, E",     &CPU::OP_RES_0_E};
+    extOpcodes[0x84] = {"RES 0, H",     &CPU::OP_RES_0_H};
+    extOpcodes[0x85] = {"RES 0, L",     &CPU::OP_RES_0_L};
+    extOpcodes[0x86] = {"RES 0, (HL)",  &CPU::OP_RES_0_HL};
+    extOpcodes[0x87] = {"RES 0, A",     &CPU::OP_RES_0_A};
+    extOpcodes[0x88] = {"RES 1, B",     &CPU::OP_RES_1_B};
+    extOpcodes[0x89] = {"RES 1, C",     &CPU::OP_RES_1_C};
+    extOpcodes[0x8A] = {"RES 1, D",     &CPU::OP_RES_1_D};
+    extOpcodes[0x8B] = {"RES 1, E",     &CPU::OP_RES_1_E};
+    extOpcodes[0x8C] = {"RES 1, H",     &CPU::OP_RES_1_H};
+    extOpcodes[0x8D] = {"RES 1, L",     &CPU::OP_RES_1_L};
+    extOpcodes[0x8E] = {"RES 1, (HL)",  &CPU::OP_RES_1_HL};
+    extOpcodes[0x8F] = {"RES 1, A",     &CPU::OP_RES_1_A};
+    extOpcodes[0x90] = {"RES 2, B",     &CPU::OP_RES_2_B};
+    extOpcodes[0x91] = {"RES 2, C",     &CPU::OP_RES_2_C};
+    extOpcodes[0x92] = {"RES 2, D",     &CPU::OP_RES_2_D};
+    extOpcodes[0x93] = {"RES 2, E",     &CPU::OP_RES_2_E};
+    extOpcodes[0x94] = {"RES 2, H",     &CPU::OP_RES_2_H};
+    extOpcodes[0x95] = {"RES 2, L",     &CPU::OP_RES_2_L};
+    extOpcodes[0x96] = {"RES 2, (HL)",  &CPU::OP_RES_2_HL};
+    extOpcodes[0x97] = {"RES 2, A",     &CPU::OP_RES_2_A};
+    extOpcodes[0x98] = {"RES 3, B",     &CPU::OP_RES_3_B};
+    extOpcodes[0x99] = {"RES 3, C",     &CPU::OP_RES_3_C};
+    extOpcodes[0x9A] = {"RES 3, D",     &CPU::OP_RES_3_D};
+    extOpcodes[0x9B] = {"RES 3, E",     &CPU::OP_RES_3_E};
+    extOpcodes[0x9C] = {"RES 3, H",     &CPU::OP_RES_3_H};
+    extOpcodes[0x9D] = {"RES 3, L",     &CPU::OP_RES_3_L};
+    extOpcodes[0x9E] = {"RES 3, (HL)",  &CPU::OP_RES_3_HL};
+    extOpcodes[0x9F] = {"RES 3, A",     &CPU::OP_RES_3_A};
+    extOpcodes[0xA0] = {"RES 4, B",     &CPU::OP_RES_4_B};
+    extOpcodes[0xA1] = {"RES 4, C",     &CPU::OP_RES_4_C};
+    extOpcodes[0xA2] = {"RES 4, D",     &CPU::OP_RES_4_D};
+    extOpcodes[0xA3] = {"RES 4, E",     &CPU::OP_RES_4_E};
+    extOpcodes[0xA4] = {"RES 4, H",     &CPU::OP_RES_4_H};
+    extOpcodes[0xA5] = {"RES 4, L",     &CPU::OP_RES_4_L};
+    extOpcodes[0xA6] = {"RES 4, (HL)",  &CPU::OP_RES_4_HL};
+    extOpcodes[0xA7] = {"RES 4, A",     &CPU::OP_RES_4_A};
+    extOpcodes[0xA8] = {"RES 5, B",     &CPU::OP_RES_5_B};
+    extOpcodes[0xA9] = {"RES 5, C",     &CPU::OP_RES_5_C};
+    extOpcodes[0xAA] = {"RES 5, D",     &CPU::OP_RES_5_D};
+    extOpcodes[0xAB] = {"RES 5, E",     &CPU::OP_RES_5_E};
+    extOpcodes[0xAC] = {"RES 5, H",     &CPU::OP_RES_5_H};
+    extOpcodes[0xAD] = {"RES 5, L",     &CPU::OP_RES_5_L};
+    extOpcodes[0xAE] = {"RES 5, (HL)",  &CPU::OP_RES_5_HL};
+    extOpcodes[0xAF] = {"RES 5, A",     &CPU::OP_RES_5_A};
+    extOpcodes[0xB0] = {"RES 6, B",     &CPU::OP_RES_6_B};
+    extOpcodes[0xB1] = {"RES 6, C",     &CPU::OP_RES_6_C};
+    extOpcodes[0xB2] = {"RES 6, D",     &CPU::OP_RES_6_D};
+    extOpcodes[0xB3] = {"RES 6, E",     &CPU::OP_RES_6_E};
+    extOpcodes[0xB4] = {"RES 6, H",     &CPU::OP_RES_6_H};
+    extOpcodes[0xB5] = {"RES 6, L",     &CPU::OP_RES_6_L};
+    extOpcodes[0xB6] = {"RES 6, (HL)",  &CPU::OP_RES_6_HL};
+    extOpcodes[0xB7] = {"RES 6, A",     &CPU::OP_RES_6_A};
+    extOpcodes[0xB8] = {"RES 7, B",     &CPU::OP_RES_7_B};
+    extOpcodes[0xB9] = {"RES 7, C",     &CPU::OP_RES_7_C};
+    extOpcodes[0xBA] = {"RES 7, D",     &CPU::OP_RES_7_D};
+    extOpcodes[0xBB] = {"RES 7, E",     &CPU::OP_RES_7_E};
+    extOpcodes[0xBC] = {"RES 7, H",     &CPU::OP_RES_7_H};
+    extOpcodes[0xBD] = {"RES 7, L",     &CPU::OP_RES_7_L};
+    extOpcodes[0xBE] = {"RES 7, (HL)",  &CPU::OP_RES_7_HL};
+    extOpcodes[0xBF] = {"RES 7, A",     &CPU::OP_RES_7_A};
+    extOpcodes[0xC0] = {"SET 0, B",     &CPU::OP_SET_0_B};
+    extOpcodes[0xC1] = {"SET 0, C",     &CPU::OP_SET_0_C};
+    extOpcodes[0xC2] = {"SET 0, D",     &CPU::OP_SET_0_D};
+    extOpcodes[0xC3] = {"SET 0, E",     &CPU::OP_SET_0_E};
+    extOpcodes[0xC4] = {"SET 0, H",     &CPU::OP_SET_0_H};
+    extOpcodes[0xC5] = {"SET 0, L",     &CPU::OP_SET_0_L};
+    extOpcodes[0xC6] = {"SET 0, (HL)",  &CPU::OP_SET_0_HL};
+    extOpcodes[0xC7] = {"SET 0, A",     &CPU::OP_SET_0_A};
+    extOpcodes[0xC8] = {"SET 1, B",     &CPU::OP_SET_1_B};
+    extOpcodes[0xC9] = {"SET 1, C",     &CPU::OP_SET_1_C};
+    extOpcodes[0xCA] = {"SET 1, D",     &CPU::OP_SET_1_D};
+    extOpcodes[0xCB] = {"SET 1, E",     &CPU::OP_SET_1_E};
+    extOpcodes[0xCC] = {"SET 1, H",     &CPU::OP_SET_1_H};
+    extOpcodes[0xCD] = {"SET 1, L",     &CPU::OP_SET_1_L};
+    extOpcodes[0xCE] = {"SET 1, (HL)",  &CPU::OP_SET_1_HL};
+    extOpcodes[0xCF] = {"SET 1, A",     &CPU::OP_SET_1_A};
+    extOpcodes[0xD0] = {"SET 2, B",     &CPU::OP_SET_2_B};
+    extOpcodes[0xD1] = {"SET 2, C",     &CPU::OP_SET_2_C};
+    extOpcodes[0xD2] = {"SET 2, D",     &CPU::OP_SET_2_D};
+    extOpcodes[0xD3] = {"SET 2, E",     &CPU::OP_SET_2_E};
+    extOpcodes[0xD4] = {"SET 2, H",     &CPU::OP_SET_2_H};
+    extOpcodes[0xD5] = {"SET 2, L",     &CPU::OP_SET_2_L};
+    extOpcodes[0xD6] = {"SET 2, (HL)",  &CPU::OP_SET_2_HL};
+    extOpcodes[0xD7] = {"SET 2, A",     &CPU::OP_SET_2_A};
+    extOpcodes[0xD8] = {"SET 3, B",     &CPU::OP_SET_3_B};
+    extOpcodes[0xD9] = {"SET 3, C",     &CPU::OP_SET_3_C};
+    extOpcodes[0xDA] = {"SET 3, D",     &CPU::OP_SET_3_D};
+    extOpcodes[0xDB] = {"SET 3, E",     &CPU::OP_SET_3_E};
+    extOpcodes[0xDC] = {"SET 3, H",     &CPU::OP_SET_3_H};
+    extOpcodes[0xDD] = {"SET 3, L",     &CPU::OP_SET_3_L};
+    extOpcodes[0xDE] = {"SET 3, (HL)",  &CPU::OP_SET_3_HL};
+    extOpcodes[0xDF] = {"SET 3, A",     &CPU::OP_SET_3_A};
+    extOpcodes[0xE0] = {"SET 4, B",     &CPU::OP_SET_4_B};
+    extOpcodes[0xE1] = {"SET 4, C",     &CPU::OP_SET_4_C};
+    extOpcodes[0xE2] = {"SET 4, D",     &CPU::OP_SET_4_D};
+    extOpcodes[0xE3] = {"SET 4, E",     &CPU::OP_SET_4_E};
+    extOpcodes[0xE4] = {"SET 4, H",     &CPU::OP_SET_4_H};
+    extOpcodes[0xE5] = {"SET 4, L",     &CPU::OP_SET_4_L};
+    extOpcodes[0xE6] = {"SET 4, (HL)",  &CPU::OP_SET_4_HL};
+    extOpcodes[0xE7] = {"SET 4, A",     &CPU::OP_SET_4_A};
+    extOpcodes[0xE8] = {"SET 5, B",     &CPU::OP_SET_5_B};
+    extOpcodes[0xE9] = {"SET 5, C",     &CPU::OP_SET_5_C};
+    extOpcodes[0xEA] = {"SET 5, D",     &CPU::OP_SET_5_D};
+    extOpcodes[0xEB] = {"SET 5, E",     &CPU::OP_SET_5_E};
+    extOpcodes[0xEC] = {"SET 5, H",     &CPU::OP_SET_5_H};
+    extOpcodes[0xED] = {"SET 5, L",     &CPU::OP_SET_5_L};
+    extOpcodes[0xEE] = {"SET 5, (HL)",  &CPU::OP_SET_5_HL};
+    extOpcodes[0xEF] = {"SET 5, A",     &CPU::OP_SET_5_A};
+    extOpcodes[0xF0] = {"SET 6, B",     &CPU::OP_SET_6_B};
+    extOpcodes[0xF1] = {"SET 6, C",     &CPU::OP_SET_6_C};
+    extOpcodes[0xF2] = {"SET 6, D",     &CPU::OP_SET_6_D};
+    extOpcodes[0xF3] = {"SET 6, E",     &CPU::OP_SET_6_E};
+    extOpcodes[0xF4] = {"SET 6, H",     &CPU::OP_SET_6_H};
+    extOpcodes[0xF5] = {"SET 6, L",     &CPU::OP_SET_6_L};
+    extOpcodes[0xF6] = {"SET 6, (HL)",  &CPU::OP_SET_6_HL};
+    extOpcodes[0xF7] = {"SET 6, A",     &CPU::OP_SET_6_A};
+    extOpcodes[0xF8] = {"SET 7, B",     &CPU::OP_SET_7_B};
+    extOpcodes[0xF9] = {"SET 7, C",     &CPU::OP_SET_7_C};
+    extOpcodes[0xFA] = {"SET 7, D",     &CPU::OP_SET_7_D};
+    extOpcodes[0xFB] = {"SET 7, E",     &CPU::OP_SET_7_E};
+    extOpcodes[0xFC] = {"SET 7, H",     &CPU::OP_SET_7_H};
+    extOpcodes[0xFD] = {"SET 7, L",     &CPU::OP_SET_7_L};
+    extOpcodes[0xFE] = {"SET 7, (HL)",  &CPU::OP_SET_7_HL};
+    extOpcodes[0xFF] = {"SET 7, A",     &CPU::OP_SET_7_A};
 }
 
 u8 CPU::fetch8() {
@@ -394,6 +651,93 @@ void CPU::cp8(u8 r1, u8 r2) {
     setN(1);
     setH((r1 & 0xF) < (r2 & 0xF));
     setC(r1 < r2);
+}
+
+void CPU::rlc8(u8& reg) {
+    u8 res = (reg << 1) | ((reg >> 7) & 0x01);
+    setZ(res == 0);
+    setN(0);
+    setH(0);
+    setC(((reg >> 7) & 0x01));
+    reg = res;
+}
+
+void CPU::rrc8(u8& reg) {
+    u8 res = ((reg & 0x01)) << 7 | (reg >> 1);
+    setZ(res == 0);
+    setN(0);
+    setH(0);
+    setC(reg & 0x01);
+    reg = res;
+}
+
+void CPU::rl8(u8& reg) {
+    u8 res = (reg << 1) | (getC() & 0x01);
+    setZ(res == 0);
+    setN(0);
+    setH(0);
+    setC(((reg >> 7) & 0x01));
+    reg = res;
+}
+
+void CPU::rr8(u8& reg) {
+    u8 res = ((getC() & 0x01) << 7) | (reg >> 1);
+    setZ(res == 0);
+    setN(0);
+    setH(0);
+    setC(reg & 0x01);
+    reg = res;
+}
+
+void CPU::sla8(u8& reg) {
+    u8 res = (reg << 1);
+    setZ(res == 0);
+    setN(0);
+    setH(0);
+    setC((reg >> 7) & 0x01);
+    reg = res;
+}
+
+void CPU::sra8(u8& reg) {
+    u8 msb = reg & 0x80;
+    u8 res = msb | (reg >> 1);
+    setZ(res == 0);
+    setN(0);
+    setH(0);
+    setC(reg & 0x01);
+    reg = res;
+}
+
+void CPU::swap8(u8& reg) {
+    u8 res = ((reg & 0x0F) << 4) | ((reg & 0xF0) >> 4);
+    setZ(res == 0);
+    setN(0);
+    setH(0);
+    setC(0);
+    reg = res;
+}
+
+void CPU::srl8(u8& reg) {
+    u8 res = (reg >> 1);
+    setZ(res == 0);
+    setN(0);
+    setH(0);
+    setC(reg & 0x01);
+    reg = res;
+}
+
+void CPU::bit8(u8 bit, u8 val) {
+    setZ((val & (1 << bit)) == 0);
+    setN(0);
+    setH(1);
+}
+
+void CPU::res8(u8 bit, u8& reg) {
+    reg &= ~(1 << bit);
+}
+
+void CPU::set8(u8 bit, u8& reg) {
+    reg |= (1 << bit);
 }
 
 u32 CPU::Instruction::execute(CPU* cpu) const {

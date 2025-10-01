@@ -961,3 +961,275 @@ u32 CPU::OP_RST_38H() {
     pc = 0x0038;
     return 16;
 }
+
+u32 CPU::OP_RLC_B()   { rlc8(regs.b); return 8; }
+u32 CPU::OP_RLC_C()   { rlc8(regs.c); return 8; }
+u32 CPU::OP_RLC_D()   { rlc8(regs.d); return 8; }
+u32 CPU::OP_RLC_E()   { rlc8(regs.e); return 8; }
+u32 CPU::OP_RLC_H()   { rlc8(regs.h); return 8; }
+u32 CPU::OP_RLC_L()   { rlc8(regs.l); return 8; }
+u32 CPU::OP_RLC_HL()  { u8 val = mmu->read8(regs.hl); rlc8(val); mmu->write8(regs.hl, val); return 16; }
+u32 CPU::OP_RLC_A()   { rlc8(regs.a); return 8; }
+u32 CPU::OP_RRC_B()   { rrc8(regs.b); return 8; }
+u32 CPU::OP_RRC_C()   { rrc8(regs.c); return 8; }
+u32 CPU::OP_RRC_D()   { rrc8(regs.d); return 8; }
+u32 CPU::OP_RRC_E()   { rrc8(regs.e); return 8; }
+u32 CPU::OP_RRC_H()   { rrc8(regs.h); return 8; }
+u32 CPU::OP_RRC_L()   { rrc8(regs.l); return 8; }
+u32 CPU::OP_RRC_HL()  { u8 val = mmu->read8(regs.hl); rrc8(val); mmu->write8(regs.hl, val); return 16; }
+u32 CPU::OP_RRC_A()   { rrc8(regs.a); return 8; }
+
+u32 CPU::OP_RL_B()    { rl8(regs.b); return 8; }
+u32 CPU::OP_RL_C()    { rl8(regs.c); return 8; }
+u32 CPU::OP_RL_D()    { rl8(regs.d); return 8; }
+u32 CPU::OP_RL_E()    { rl8(regs.e); return 8; }
+u32 CPU::OP_RL_H()    { rl8(regs.h); return 8; }
+u32 CPU::OP_RL_L()    { rl8(regs.l); return 8; }
+u32 CPU::OP_RL_HL()   { u8 val = mmu->read8(regs.hl); rl8(val); mmu->write8(regs.hl, val); return 16; }
+u32 CPU::OP_RL_A()    { rl8(regs.a); return 8; }
+u32 CPU::OP_RR_B()    { rr8(regs.b); return 8; }
+u32 CPU::OP_RR_C()    { rr8(regs.c); return 8; }
+u32 CPU::OP_RR_D()    { rr8(regs.d); return 8; }
+u32 CPU::OP_RR_E()    { rr8(regs.e); return 8; }
+u32 CPU::OP_RR_H()    { rr8(regs.h); return 8; }
+u32 CPU::OP_RR_L()    { rr8(regs.l); return 8; }
+u32 CPU::OP_RR_HL()   { u8 val = mmu->read8(regs.hl); rr8(val); mmu->write8(regs.hl, val); return 16; }
+u32 CPU::OP_RR_A()    { rr8(regs.a); return 8; }
+
+u32 CPU::OP_SLA_B()   { sla8(regs.b); return 8; }
+u32 CPU::OP_SLA_C()   { sla8(regs.c); return 8; }
+u32 CPU::OP_SLA_D()   { sla8(regs.d); return 8; }
+u32 CPU::OP_SLA_E()   { sla8(regs.e); return 8; }
+u32 CPU::OP_SLA_H()   { sla8(regs.h); return 8; }
+u32 CPU::OP_SLA_L()   { sla8(regs.l); return 8; }
+u32 CPU::OP_SLA_HL()  { u8 val = mmu->read8(regs.hl); sla8(val); mmu->write8(regs.hl, val); return 16; }
+u32 CPU::OP_SLA_A()   { sla8(regs.a); return 8; }
+u32 CPU::OP_SRA_B()   { sra8(regs.b); return 8; }
+u32 CPU::OP_SRA_C()   { sra8(regs.c); return 8; }
+u32 CPU::OP_SRA_D()   { sra8(regs.d); return 8; }
+u32 CPU::OP_SRA_E()   { sra8(regs.e); return 8; }
+u32 CPU::OP_SRA_H()   { sra8(regs.h); return 8; }
+u32 CPU::OP_SRA_L()   { sra8(regs.l); return 8; }
+u32 CPU::OP_SRA_HL()  { u8 val = mmu->read8(regs.hl); sra8(val); mmu->write8(regs.hl, val); return 16; }
+u32 CPU::OP_SRA_A()   { sra8(regs.a); return 8; }
+
+u32 CPU::OP_SWAP_B()  { swap8(regs.b); return 8; }
+u32 CPU::OP_SWAP_C()  { swap8(regs.c); return 8; }
+u32 CPU::OP_SWAP_D()  { swap8(regs.d); return 8; }
+u32 CPU::OP_SWAP_E()  { swap8(regs.e); return 8; }
+u32 CPU::OP_SWAP_H()  { swap8(regs.h); return 8; }
+u32 CPU::OP_SWAP_L()  { swap8(regs.l); return 8; }
+u32 CPU::OP_SWAP_HL() { u8 val = mmu->read8(regs.hl); swap8(val); mmu->write8(regs.hl, val); return 16; }
+u32 CPU::OP_SWAP_A()  { swap8(regs.a); return 8; }
+u32 CPU::OP_SRL_B()   { srl8(regs.b); return 8; }
+u32 CPU::OP_SRL_C()   { srl8(regs.c); return 8; }
+u32 CPU::OP_SRL_D()   { srl8(regs.d); return 8; }
+u32 CPU::OP_SRL_E()   { srl8(regs.e); return 8; }
+u32 CPU::OP_SRL_H()   { srl8(regs.h); return 8; }
+u32 CPU::OP_SRL_L()   { srl8(regs.l); return 8; }
+u32 CPU::OP_SRL_HL()  { u8 val = mmu->read8(regs.hl); srl8(val); mmu->write8(regs.hl, val); return 16; }
+u32 CPU::OP_SRL_A()   { srl8(regs.a); return 8; }
+
+u32 CPU::OP_BIT_0_B()  { bit8(0, regs.b); return 8; }
+u32 CPU::OP_BIT_0_C()  { bit8(0, regs.c); return 8; }
+u32 CPU::OP_BIT_0_D()  { bit8(0, regs.d); return 8; }
+u32 CPU::OP_BIT_0_E()  { bit8(0, regs.e); return 8; }
+u32 CPU::OP_BIT_0_H()  { bit8(0, regs.h); return 8; }
+u32 CPU::OP_BIT_0_L()  { bit8(0, regs.l); return 8; }
+u32 CPU::OP_BIT_0_HL() { u8 val = mmu->read8(regs.hl); bit8(0, val); return 12; }
+u32 CPU::OP_BIT_0_A()  { bit8(0, regs.a); return 8; }
+u32 CPU::OP_BIT_1_B()  { bit8(1, regs.b); return 8; }
+u32 CPU::OP_BIT_1_C()  { bit8(1, regs.c); return 8; }
+u32 CPU::OP_BIT_1_D()  { bit8(1, regs.d); return 8; }
+u32 CPU::OP_BIT_1_E()  { bit8(1, regs.e); return 8; }
+u32 CPU::OP_BIT_1_H()  { bit8(1, regs.h); return 8; }
+u32 CPU::OP_BIT_1_L()  { bit8(1, regs.l); return 8; }
+u32 CPU::OP_BIT_1_HL() { u8 val = mmu->read8(regs.hl); bit8(1, val); return 12; }
+u32 CPU::OP_BIT_1_A()  { bit8(1, regs.a); return 8; }
+
+u32 CPU::OP_BIT_2_B()  { bit8(2, regs.b); return 8; }
+u32 CPU::OP_BIT_2_C()  { bit8(2, regs.c); return 8; }
+u32 CPU::OP_BIT_2_D()  { bit8(2, regs.d); return 8; }
+u32 CPU::OP_BIT_2_E()  { bit8(2, regs.e); return 8; }
+u32 CPU::OP_BIT_2_H()  { bit8(2, regs.h); return 8; }
+u32 CPU::OP_BIT_2_L()  { bit8(2, regs.l); return 8; }
+u32 CPU::OP_BIT_2_HL() { u8 val = mmu->read8(regs.hl); bit8(2, val); return 12; }
+u32 CPU::OP_BIT_2_A()  { bit8(2, regs.a); return 8; }
+u32 CPU::OP_BIT_3_B()  { bit8(3, regs.b); return 8; }
+u32 CPU::OP_BIT_3_C()  { bit8(3, regs.c); return 8; }
+u32 CPU::OP_BIT_3_D()  { bit8(3, regs.d); return 8; }
+u32 CPU::OP_BIT_3_E()  { bit8(3, regs.e); return 8; }
+u32 CPU::OP_BIT_3_H()  { bit8(3, regs.h); return 8; }
+u32 CPU::OP_BIT_3_L()  { bit8(3, regs.l); return 8; }
+u32 CPU::OP_BIT_3_HL() { u8 val = mmu->read8(regs.hl); bit8(3, val); return 12; }
+u32 CPU::OP_BIT_3_A()  { bit8(3, regs.a); return 8; }
+
+u32 CPU::OP_BIT_4_B()  { bit8(4, regs.b); return 8; }
+u32 CPU::OP_BIT_4_C()  { bit8(4, regs.c); return 8; }
+u32 CPU::OP_BIT_4_D()  { bit8(4, regs.d); return 8; }
+u32 CPU::OP_BIT_4_E()  { bit8(4, regs.e); return 8; }
+u32 CPU::OP_BIT_4_H()  { bit8(4, regs.h); return 8; }
+u32 CPU::OP_BIT_4_L()  { bit8(4, regs.l); return 8; }
+u32 CPU::OP_BIT_4_HL() { u8 val = mmu->read8(regs.hl); bit8(4, val); return 12; }
+u32 CPU::OP_BIT_4_A()  { bit8(4, regs.a); return 8; }
+u32 CPU::OP_BIT_5_B()  { bit8(5, regs.b); return 8; }
+u32 CPU::OP_BIT_5_C()  { bit8(5, regs.c); return 8; }
+u32 CPU::OP_BIT_5_D()  { bit8(5, regs.d); return 8; }
+u32 CPU::OP_BIT_5_E()  { bit8(5, regs.e); return 8; }
+u32 CPU::OP_BIT_5_H()  { bit8(5, regs.h); return 8; }
+u32 CPU::OP_BIT_5_L()  { bit8(5, regs.l); return 8; }
+u32 CPU::OP_BIT_5_HL() { u8 val = mmu->read8(regs.hl); bit8(5, val); return 12; }
+u32 CPU::OP_BIT_5_A()  { bit8(5, regs.a); return 8; }
+
+u32 CPU::OP_BIT_6_B()  { bit8(6, regs.b); return 8; }
+u32 CPU::OP_BIT_6_C()  { bit8(6, regs.c); return 8; }
+u32 CPU::OP_BIT_6_D()  { bit8(6, regs.d); return 8; }
+u32 CPU::OP_BIT_6_E()  { bit8(6, regs.e); return 8; }
+u32 CPU::OP_BIT_6_H()  { bit8(6, regs.h); return 8; }
+u32 CPU::OP_BIT_6_L()  { bit8(6, regs.l); return 8; }
+u32 CPU::OP_BIT_6_HL() { u8 val = mmu->read8(regs.hl); bit8(6, val); return 12; }
+u32 CPU::OP_BIT_6_A()  { bit8(6, regs.a); return 8; }
+u32 CPU::OP_BIT_7_B()  { bit8(7, regs.b); return 8; }
+u32 CPU::OP_BIT_7_C()  { bit8(7, regs.c); return 8; }
+u32 CPU::OP_BIT_7_D()  { bit8(7, regs.d); return 8; }
+u32 CPU::OP_BIT_7_E()  { bit8(7, regs.e); return 8; }
+u32 CPU::OP_BIT_7_H()  { bit8(7, regs.h); return 8; }
+u32 CPU::OP_BIT_7_L()  { bit8(7, regs.l); return 8; }
+u32 CPU::OP_BIT_7_HL() { u8 val = mmu->read8(regs.hl); bit8(7, val); return 12; }
+u32 CPU::OP_BIT_7_A()  { bit8(7, regs.a); return 8; }
+
+u32 CPU::OP_RES_0_B()  { res8(0, regs.b); return 8; }
+u32 CPU::OP_RES_0_C()  { res8(0, regs.c); return 8; }
+u32 CPU::OP_RES_0_D()  { res8(0, regs.d); return 8; }
+u32 CPU::OP_RES_0_E()  { res8(0, regs.e); return 8; }
+u32 CPU::OP_RES_0_H()  { res8(0, regs.h); return 8; }
+u32 CPU::OP_RES_0_L()  { res8(0, regs.l); return 8; }
+u32 CPU::OP_RES_0_HL() { u8 v = mmu->read8(regs.hl); res8(0, v); mmu->write8(regs.hl, v); return 16; }
+u32 CPU::OP_RES_0_A()  { res8(0, regs.a); return 8; }
+u32 CPU::OP_RES_1_B()  { res8(1, regs.b); return 8; }
+u32 CPU::OP_RES_1_C()  { res8(1, regs.c); return 8; }
+u32 CPU::OP_RES_1_D()  { res8(1, regs.d); return 8; }
+u32 CPU::OP_RES_1_E()  { res8(1, regs.e); return 8; }
+u32 CPU::OP_RES_1_H()  { res8(1, regs.h); return 8; }
+u32 CPU::OP_RES_1_L()  { res8(1, regs.l); return 8; }
+u32 CPU::OP_RES_1_HL() { u8 v = mmu->read8(regs.hl); res8(1, v); mmu->write8(regs.hl, v); return 16; }
+u32 CPU::OP_RES_1_A()  { res8(1, regs.a); return 8; }
+
+u32 CPU::OP_RES_2_B()  { res8(2, regs.b); return 8; }
+u32 CPU::OP_RES_2_C()  { res8(2, regs.c); return 8; }
+u32 CPU::OP_RES_2_D()  { res8(2, regs.d); return 8; }
+u32 CPU::OP_RES_2_E()  { res8(2, regs.e); return 8; }
+u32 CPU::OP_RES_2_H()  { res8(2, regs.h); return 8; }
+u32 CPU::OP_RES_2_L()  { res8(2, regs.l); return 8; }
+u32 CPU::OP_RES_2_HL() { u8 v = mmu->read8(regs.hl); res8(2, v); mmu->write8(regs.hl, v); return 16; }
+u32 CPU::OP_RES_2_A()  { res8(2, regs.a); return 8; }
+u32 CPU::OP_RES_3_B()  { res8(3, regs.b); return 8; }
+u32 CPU::OP_RES_3_C()  { res8(3, regs.c); return 8; }
+u32 CPU::OP_RES_3_D()  { res8(3, regs.d); return 8; }
+u32 CPU::OP_RES_3_E()  { res8(3, regs.e); return 8; }
+u32 CPU::OP_RES_3_H()  { res8(3, regs.h); return 8; }
+u32 CPU::OP_RES_3_L()  { res8(3, regs.l); return 8; }
+u32 CPU::OP_RES_3_HL() { u8 v = mmu->read8(regs.hl); res8(3, v); mmu->write8(regs.hl, v); return 16; }
+u32 CPU::OP_RES_3_A()  { res8(3, regs.a); return 8; }
+
+u32 CPU::OP_RES_4_B()  { res8(4, regs.b); return 8; }
+u32 CPU::OP_RES_4_C()  { res8(4, regs.c); return 8; }
+u32 CPU::OP_RES_4_D()  { res8(4, regs.d); return 8; }
+u32 CPU::OP_RES_4_E()  { res8(4, regs.e); return 8; }
+u32 CPU::OP_RES_4_H()  { res8(4, regs.h); return 8; }
+u32 CPU::OP_RES_4_L()  { res8(4, regs.l); return 8; }
+u32 CPU::OP_RES_4_HL() { u8 v = mmu->read8(regs.hl); res8(4, v); mmu->write8(regs.hl, v); return 16; }
+u32 CPU::OP_RES_4_A()  { res8(4, regs.a); return 8; }
+u32 CPU::OP_RES_5_B()  { res8(5, regs.b); return 8; }
+u32 CPU::OP_RES_5_C()  { res8(5, regs.c); return 8; }
+u32 CPU::OP_RES_5_D()  { res8(5, regs.d); return 8; }
+u32 CPU::OP_RES_5_E()  { res8(5, regs.e); return 8; }
+u32 CPU::OP_RES_5_H()  { res8(5, regs.h); return 8; }
+u32 CPU::OP_RES_5_L()  { res8(5, regs.l); return 8; }
+u32 CPU::OP_RES_5_HL() { u8 v = mmu->read8(regs.hl); res8(5, v); mmu->write8(regs.hl, v); return 16; }
+u32 CPU::OP_RES_5_A()  { res8(5, regs.a); return 8; }
+
+u32 CPU::OP_RES_6_B()  { res8(6, regs.b); return 8; }
+u32 CPU::OP_RES_6_C()  { res8(6, regs.c); return 8; }
+u32 CPU::OP_RES_6_D()  { res8(6, regs.d); return 8; }
+u32 CPU::OP_RES_6_E()  { res8(6, regs.e); return 8; }
+u32 CPU::OP_RES_6_H()  { res8(6, regs.h); return 8; }
+u32 CPU::OP_RES_6_L()  { res8(6, regs.l); return 8; }
+u32 CPU::OP_RES_6_HL() { u8 v = mmu->read8(regs.hl); res8(6, v); mmu->write8(regs.hl, v); return 16; }
+u32 CPU::OP_RES_6_A()  { res8(6, regs.a); return 8; }
+u32 CPU::OP_RES_7_B()  { res8(7, regs.b); return 8; }
+u32 CPU::OP_RES_7_C()  { res8(7, regs.c); return 8; }
+u32 CPU::OP_RES_7_D()  { res8(7, regs.d); return 8; }
+u32 CPU::OP_RES_7_E()  { res8(7, regs.e); return 8; }
+u32 CPU::OP_RES_7_H()  { res8(7, regs.h); return 8; }
+u32 CPU::OP_RES_7_L()  { res8(7, regs.l); return 8; }
+u32 CPU::OP_RES_7_HL() { u8 v = mmu->read8(regs.hl); res8(7, v); mmu->write8(regs.hl, v); return 16; }
+u32 CPU::OP_RES_7_A()  { res8(7, regs.a); return 8; }
+
+u32 CPU::OP_SET_0_B()  { set8(0, regs.b); return 8; }
+u32 CPU::OP_SET_0_C()  { set8(0, regs.c); return 8; }
+u32 CPU::OP_SET_0_D()  { set8(0, regs.d); return 8; }
+u32 CPU::OP_SET_0_E()  { set8(0, regs.e); return 8; }
+u32 CPU::OP_SET_0_H()  { set8(0, regs.h); return 8; }
+u32 CPU::OP_SET_0_L()  { set8(0, regs.l); return 8; }
+u32 CPU::OP_SET_0_HL() { u8 v = mmu->read8(regs.hl); set8(0, v); mmu->write8(regs.hl, v); return 16; }
+u32 CPU::OP_SET_0_A()  { set8(0, regs.a); return 8; }
+u32 CPU::OP_SET_1_B()  { set8(1, regs.b); return 8; }
+u32 CPU::OP_SET_1_C()  { set8(1, regs.c); return 8; }
+u32 CPU::OP_SET_1_D()  { set8(1, regs.d); return 8; }
+u32 CPU::OP_SET_1_E()  { set8(1, regs.e); return 8; }
+u32 CPU::OP_SET_1_H()  { set8(1, regs.h); return 8; }
+u32 CPU::OP_SET_1_L()  { set8(1, regs.l); return 8; }
+u32 CPU::OP_SET_1_HL() { u8 v = mmu->read8(regs.hl); set8(1, v); mmu->write8(regs.hl, v); return 16; }
+u32 CPU::OP_SET_1_A()  { set8(1, regs.a); return 8; }
+
+u32 CPU::OP_SET_2_B()  { set8(2, regs.b); return 8; }
+u32 CPU::OP_SET_2_C()  { set8(2, regs.c); return 8; }
+u32 CPU::OP_SET_2_D()  { set8(2, regs.d); return 8; }
+u32 CPU::OP_SET_2_E()  { set8(2, regs.e); return 8; }
+u32 CPU::OP_SET_2_H()  { set8(2, regs.h); return 8; }
+u32 CPU::OP_SET_2_L()  { set8(2, regs.l); return 8; }
+u32 CPU::OP_SET_2_HL() { u8 v = mmu->read8(regs.hl); set8(2, v); mmu->write8(regs.hl, v); return 16; }
+u32 CPU::OP_SET_2_A()  { set8(2, regs.a); return 8; }
+u32 CPU::OP_SET_3_B()  { set8(3, regs.b); return 8; }
+u32 CPU::OP_SET_3_C()  { set8(3, regs.c); return 8; }
+u32 CPU::OP_SET_3_D()  { set8(3, regs.d); return 8; }
+u32 CPU::OP_SET_3_E()  { set8(3, regs.e); return 8; }
+u32 CPU::OP_SET_3_H()  { set8(3, regs.h); return 8; }
+u32 CPU::OP_SET_3_L()  { set8(3, regs.l); return 8; }
+u32 CPU::OP_SET_3_HL() { u8 v = mmu->read8(regs.hl); set8(3, v); mmu->write8(regs.hl, v); return 16; }
+u32 CPU::OP_SET_3_A()  { set8(3, regs.a); return 8; }
+
+u32 CPU::OP_SET_4_B()  { set8(4, regs.b); return 8; }
+u32 CPU::OP_SET_4_C()  { set8(4, regs.c); return 8; }
+u32 CPU::OP_SET_4_D()  { set8(4, regs.d); return 8; }
+u32 CPU::OP_SET_4_E()  { set8(4, regs.e); return 8; }
+u32 CPU::OP_SET_4_H()  { set8(4, regs.h); return 8; }
+u32 CPU::OP_SET_4_L()  { set8(4, regs.l); return 8; }
+u32 CPU::OP_SET_4_HL() { u8 v = mmu->read8(regs.hl); set8(4, v); mmu->write8(regs.hl, v); return 16; }
+u32 CPU::OP_SET_4_A()  { set8(4, regs.a); return 8; }
+u32 CPU::OP_SET_5_B()  { set8(5, regs.b); return 8; }
+u32 CPU::OP_SET_5_C()  { set8(5, regs.c); return 8; }
+u32 CPU::OP_SET_5_D()  { set8(5, regs.d); return 8; }
+u32 CPU::OP_SET_5_E()  { set8(5, regs.e); return 8; }
+u32 CPU::OP_SET_5_H()  { set8(5, regs.h); return 8; }
+u32 CPU::OP_SET_5_L()  { set8(5, regs.l); return 8; }
+u32 CPU::OP_SET_5_HL() { u8 v = mmu->read8(regs.hl); set8(5, v); mmu->write8(regs.hl, v); return 16; }
+u32 CPU::OP_SET_5_A()  { set8(5, regs.a); return 8; }
+
+u32 CPU::OP_SET_6_B()  { set8(6, regs.b); return 8; }
+u32 CPU::OP_SET_6_C()  { set8(6, regs.c); return 8; }
+u32 CPU::OP_SET_6_D()  { set8(6, regs.d); return 8; }
+u32 CPU::OP_SET_6_E()  { set8(6, regs.e); return 8; }
+u32 CPU::OP_SET_6_H()  { set8(6, regs.h); return 8; }
+u32 CPU::OP_SET_6_L()  { set8(6, regs.l); return 8; }
+u32 CPU::OP_SET_6_HL() { u8 v = mmu->read8(regs.hl); set8(6, v); mmu->write8(regs.hl, v); return 16; }
+u32 CPU::OP_SET_6_A()  { set8(6, regs.a); return 8; }
+u32 CPU::OP_SET_7_B()  { set8(7, regs.b); return 8; }
+u32 CPU::OP_SET_7_C()  { set8(7, regs.c); return 8; }
+u32 CPU::OP_SET_7_D()  { set8(7, regs.d); return 8; }
+u32 CPU::OP_SET_7_E()  { set8(7, regs.e); return 8; }
+u32 CPU::OP_SET_7_H()  { set8(7, regs.h); return 8; }
+u32 CPU::OP_SET_7_L()  { set8(7, regs.l); return 8; }
+u32 CPU::OP_SET_7_HL() { u8 v = mmu->read8(regs.hl); set8(7, v); mmu->write8(regs.hl, v); return 16; }
+u32 CPU::OP_SET_7_A()  { set8(7, regs.a); return 8; }
