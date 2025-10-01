@@ -280,7 +280,7 @@ public:
     u32 OP_CALL_NZ_a16();
     u32 OP_PUSH_BC();
     u32 OP_ADD_A_d8();
-    u32 OP_RST_0();
+    u32 OP_RST_00H();
     u32 OP_RET_Z();
     u32 OP_RET();
     u32 OP_JP_Z_a16();
@@ -288,61 +288,61 @@ public:
     u32 OP_CALL_Z_a16();
     u32 OP_CALL_a16();
     u32 OP_ADC_A_d8();
-    u32 OP_RST_1();
+    u32 OP_RST_08H();
 
     // 0xD0-0xDF
     u32 OP_RET_NC();
     u32 OP_POP_DE();
     u32 OP_JP_NC_a16();
-    // u32 OP_UNDEFINED_D3();
+    u32 OP_UNDEFINED_D3();
     u32 OP_CALL_NC_a16();
     u32 OP_PUSH_DE();
     u32 OP_SUB_d8();
-    u32 OP_RST_2();
+    u32 OP_RST_10H();
     u32 OP_RET_C();
     u32 OP_RETI();
     u32 OP_JP_C_a16();
-    // u32 OP_UNDEFINED_DB();
+    u32 OP_UNDEFINED_DB();
     u32 OP_CALL_C_a16();
-    // u32 OP_UNDEFINED_DD();
+    u32 OP_UNDEFINED_DD();
     u32 OP_SBC_A_d8();
-    u32 OP_RST_3();
+    u32 OP_RST_18H();
 
     // 0xE0-0xEF
-    u32 OP_LD_a8_A();
+    u32 OP_LDH_a8_A();
     u32 OP_POP_HL();
     u32 OP_LD_aC_A();
-    // u32 OP_UNDEFINED_E3();
-    // u32 OP_UNDEFINED_E4();
+    u32 OP_UNDEFINED_E3();
+    u32 OP_UNDEFINED_E4();
     u32 OP_PUSH_HL();
     u32 OP_AND_d8();
-    u32 OP_RST_4();
+    u32 OP_RST_20H();
     u32 OP_ADD_SP_r8();
     u32 OP_JP_HL();
     u32 OP_LD_a16_A();
-    // u32 OP_UNDEFINED_EB();
-    // u32 OP_UNDEFINED_EC();
-    // u32 OP_UNDEFINED_ED();
+    u32 OP_UNDEFINED_EB();
+    u32 OP_UNDEFINED_EC();
+    u32 OP_UNDEFINED_ED();
     u32 OP_XOR_d8();
-    u32 OP_RST_5();
+    u32 OP_RST_28H();
 
     // 0xF0-0xFF
     u32 OP_LDH_A_a8();
     u32 OP_POP_AF();
     u32 OP_LD_A_aC();
     u32 OP_DI();
-    // u32 OP_UNDEFINED_F4();
+    u32 OP_UNDEFINED_F4();
     u32 OP_PUSH_AF();
     u32 OP_OR_d8();
-    u32 OP_RST_6();
+    u32 OP_RST_30H();
     u32 OP_LD_HL_SP_r8();
     u32 OP_LD_SP_HL();
     u32 OP_LD_A_a16();
     u32 OP_EI();
-    // u32 OP_UNDEFINED_FC();
-    // u32 OP_UNDEFINED_FD();
+    u32 OP_UNDEFINED_FC();
+    u32 OP_UNDEFINED_FD();
     u32 OP_CP_d8();
-    u32 OP_RST_7();
+    u32 OP_RST_38H();
 
     // CB-prefix opcodes
     // CB 0x00-0x0F

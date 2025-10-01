@@ -534,18 +534,430 @@ u32 CPU::OP_CP_HL() { cp8(regs.a, mmu->read8(regs.hl)); return 8; }
 u32 CPU::OP_CP_A() { cp8(regs.a, regs.a); return 4; }
 
 u32 CPU::OP_RET_NZ() {
-    return 0;
+    if (!getZ()) {
+        pc = mmu->read16(sp);
+        sp += 2;
+        return 20;
+    }
+    else {
+        return 8;
+    }
 }
 
 u32 CPU::OP_POP_BC() {
+    regs.bc = mmu->read16(sp);
+    sp += 2;
     return 12;
 }
 
 u32 CPU::OP_JP_NZ_a16() {
-    return 0;
+    u16 a16 = fetch16();
+    if (!getZ()) {
+        pc = a16;
+        return 16;
+    }
+    else {
+        return 12;
+    }
 }
 
 u32 CPU::OP_JP_a16() {
-    pc = peek16();
+    u16 a16 = fetch16();
+    pc = a16;
+    return 16;
+}
+
+u32 CPU::OP_CALL_NZ_a16() {
+    u16 a16 = fetch16();
+    if (!getZ()) {
+        sp -= 2;
+        mmu->write16(sp, pc);
+        pc = a16;
+        return 24;
+    }
+    else {
+        return 12;
+    }
+}
+
+u32 CPU::OP_PUSH_BC() {
+    sp -= 2;
+    mmu->write16(sp, regs.bc);
+    return 16;
+}
+
+u32 CPU::OP_ADD_A_d8() {
+    add8(regs.a, fetch8());
+    return 8;
+}
+
+u32 CPU::OP_RST_00H() {
+    sp -= 2;
+    mmu->write16(sp, pc);
+    pc = 0x0000;
+    return 16;
+}
+
+u32 CPU::OP_RET_Z() {
+    if (getZ()) {
+        pc = mmu->read16(sp);
+        sp += 2;
+        return 20;
+    }
+    else {
+        return 8;
+    }
+}
+
+u32 CPU::OP_RET() {
+    pc = mmu->read16(sp);
+    sp += 2;
+    return 16;
+}
+
+u32 CPU::OP_JP_Z_a16() {
+    u16 a16 = fetch16();
+    if (getZ()) {
+        pc = a16;
+        return 16;
+    }
+    else {
+        return 12;
+    }
+}
+
+u32 CPU::OP_CB_prefix() {
+    return 0;
+}
+
+u32 CPU::OP_CALL_Z_a16() {
+    u16 a16 = fetch16();
+    if (getZ()) {
+        sp -= 2;
+        mmu->write16(sp, pc);
+        pc = a16;
+        return 24;
+    }
+    else {
+        return 12;
+    }
+}
+
+u32 CPU::OP_CALL_a16() {
+    u16 a16 = fetch16();
+    sp -= 2;
+    mmu->write16(sp, pc);
+    pc = a16;
+    return 24;
+}
+
+u32 CPU::OP_ADC_A_d8() {
+    adc8(regs.a, fetch8());
+    return 8;
+}
+
+u32 CPU::OP_RST_08H() {
+    sp -= 2;
+    mmu->write16(sp, pc);
+    pc = 0x0008;
+    return 16;
+}
+
+u32 CPU::OP_RET_NC() {
+    if (!getC()) {
+        pc = mmu->read16(sp);
+        sp += 2;
+        return 20;
+    }
+    else {
+        return 8;
+    }
+}
+
+u32 CPU::OP_POP_DE() {
+    regs.de = mmu->read16(sp);
+    sp += 2;
+    return 12;
+}
+
+u32 CPU::OP_JP_NC_a16() {
+    u16 a16 = fetch16();
+    if (!getC()) {
+        pc = a16;
+        return 16;
+    }
+    else {
+        return 12;
+    }
+}
+
+u32 CPU::OP_UNDEFINED_D3() {
+    return 0;
+}
+
+u32 CPU::OP_CALL_NC_a16() {
+    u16 a16 = fetch16();
+    if (!getC()) {
+        sp -= 2;
+        mmu->write16(sp, pc);
+        pc = a16;
+        return 24;
+    }
+    else {
+        return 12;
+    }
+}
+
+u32 CPU::OP_PUSH_DE() {
+    sp -= 2;
+    mmu->write16(sp, regs.de);
+    return 16;
+}
+
+u32 CPU::OP_SUB_d8() {
+    sub8(regs.a, fetch8());
+    return 8;
+}
+
+u32 CPU::OP_RST_10H() {
+    sp -= 2;
+    mmu->write16(sp, pc);
+    pc = 0x0010;
+    return 16;
+}
+
+u32 CPU::OP_RET_C() {
+    if (getC()) {
+        pc = mmu->read16(sp);
+        sp += 2;
+        return 20;
+    }
+    else {
+        return 8;
+    }
+}
+
+// FIXME
+u32 CPU::OP_RETI() {
+    return 16;
+}
+
+u32 CPU::OP_JP_C_a16() {
+    u16 a16 = fetch16();
+    if (getC()) {
+        pc = a16;
+        return 16;
+    }
+    else {
+        return 12;
+    }
+}
+
+u32 CPU::OP_UNDEFINED_DB() {
+    return 0;
+}
+
+u32 CPU::OP_CALL_C_a16() {
+    u16 a16 = fetch16();
+    if (getC()) {
+        sp -= 2;
+        mmu->write16(sp, pc);
+        pc = a16;
+        return 24;
+    }
+    else {
+        return 12;
+    }
+}
+
+u32 CPU::OP_UNDEFINED_DD() {
+    return 0;
+}
+
+u32 CPU::OP_SBC_A_d8() {
+    sbc8(regs.a, fetch8());
+    return 8;
+}
+
+u32 CPU::OP_RST_18H() {
+    sp -= 2;
+    mmu->write16(sp, pc);
+    pc = 0x0018;
+    return 16;
+}
+
+u32 CPU::OP_LDH_a8_A() {
+    u8 a8 = fetch8();
+    mmu->write8(0xFF00 + a8, regs.a);
+    return 12;
+}
+
+u32 CPU::OP_POP_HL() {
+    regs.hl = mmu->read16(sp);
+    sp += 2;
+    return 12;
+}
+
+u32 CPU::OP_LD_aC_A() {
+    mmu->write8(0xFF00 + regs.c, regs.a);
+    return 8;
+}
+
+u32 CPU::OP_UNDEFINED_E3() {
+    return 0;
+}
+
+u32 CPU::OP_UNDEFINED_E4() {
+    return 0;
+}
+
+u32 CPU::OP_PUSH_HL() {
+    sp -= 2;
+    mmu->write16(sp, regs.hl);
+    return 16;
+}
+
+u32 CPU::OP_AND_d8() {
+    and8(regs.a, fetch8());
+    return 8;
+}
+
+u32 CPU::OP_RST_20H() {
+    sp -= 2;
+    mmu->write16(sp, pc);
+    pc = 0x0020;
+    return 16;
+}
+
+u32 CPU::OP_ADD_SP_r8() {
+    s8 r8 = static_cast<s8>(fetch8());
+    u16 spBefore = sp;
+    u16 result = spBefore + r8;
+
+    setZ(0);
+    setN(0);
+    setH(((spBefore & 0x0F) + (r8 & 0x0F)) > 0x0F);
+    setC(((spBefore & 0xFF) + (r8 & 0xFF)) > 0xFF);
+
+    sp = result;
+    return 16;
+}
+
+u32 CPU::OP_JP_HL() {
+    pc = regs.hl;
+    return 4;
+}
+
+u32 CPU::OP_LD_a16_A() {
+    mmu->write8(fetch16(), regs.a);
+    return 16;
+}
+
+u32 CPU::OP_UNDEFINED_EB() {
+    return 0;
+}
+
+u32 CPU::OP_UNDEFINED_EC() {
+    return 0;
+}
+
+u32 CPU::OP_UNDEFINED_ED() {
+    return 0;
+}
+
+u32 CPU::OP_XOR_d8() {
+    xor8(regs.a, fetch8());
+    return 8;
+}
+
+u32 CPU::OP_RST_28H() {
+    sp -= 2;
+    mmu->write16(sp, pc);
+    pc = 0x0028;
+    return 16;
+}
+
+u32 CPU::OP_LDH_A_a8() {
+    u8 a8 = fetch8();
+    regs.a = mmu->read8(0xFF00 + a8);
+    return 12;
+}
+
+u32 CPU::OP_POP_AF() {
+    regs.af = mmu->read16(sp) & 0xFFF0;
+    sp += 2;
+    return 12;
+}
+
+u32 CPU::OP_LD_A_aC() {
+    regs.a = mmu->read8(0xFF00 + regs.c);
+    return 8;
+}
+
+// FIXME
+u32 CPU::OP_DI() {
+    return 4;
+}
+
+u32 CPU::OP_UNDEFINED_F4() {
+    return 0;
+}
+
+u32 CPU::OP_PUSH_AF() {
+    sp -= 2;
+    mmu->write16(sp, regs.af & 0xFFF0);
+    return 16;
+}
+
+u32 CPU::OP_OR_d8() {
+    or8(regs.a, fetch8());
+    return 8;
+}
+
+u32 CPU::OP_RST_30H() {
+    sp -= 2;
+    mmu->write16(sp, pc);
+    pc = 0x0030;
+    return 16;
+}
+
+// FIXME
+u32 CPU::OP_LD_HL_SP_r8() {
+    return 12;
+}
+
+u32 CPU::OP_LD_SP_HL() {
+    sp = regs.hl;
+    return 8;
+}
+
+u32 CPU::OP_LD_A_a16() {
+    u16 a16 = fetch16();
+    regs.a = mmu->read8(a16);
+    return 16;
+}
+
+// FIXME
+u32 CPU::OP_EI() {
+    return 4;
+}
+
+u32 CPU::OP_UNDEFINED_FC() {
+    return 0;
+}
+
+u32 CPU::OP_UNDEFINED_FD() {
+    return 0;
+}
+
+u32 CPU::OP_CP_d8() {
+    cp8(regs.a, fetch8());
+    return 8;
+}
+
+u32 CPU::OP_RST_38H() {
+    sp -= 2;
+    mmu->write16(sp, pc);
+    pc = 0x0038;
     return 16;
 }

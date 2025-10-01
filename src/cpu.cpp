@@ -205,10 +205,70 @@ CPU::CPU(MMU* mmu) {
     opcodes[0xBD] = {"CP L",         &CPU::OP_CP_L};
     opcodes[0xBE] = {"CP (HL)",      &CPU::OP_CP_HL};
     opcodes[0xBF] = {"CP A",         &CPU::OP_CP_A};
-
-
-    // Example later instruction
+    opcodes[0xC0] = {"RET NZ",       &CPU::OP_RET_NZ};
+    opcodes[0xC1] = {"POP BC",       &CPU::OP_POP_BC};
+    opcodes[0xC2] = {"JP NZ, a16",   &CPU::OP_JP_NZ_a16};
     opcodes[0xC3] = {"JP a16",       &CPU::OP_JP_a16};
+    opcodes[0xC4] = {"CALL NZ, a16", &CPU::OP_CALL_NZ_a16};
+    opcodes[0xC5] = {"PUSH BC",      &CPU::OP_PUSH_BC};
+    opcodes[0xC6] = {"ADD A, d8",    &CPU::OP_ADD_A_d8};
+    opcodes[0xC7] = {"RST 00H",      &CPU::OP_RST_00H};
+    opcodes[0xC8] = {"RET Z",        &CPU::OP_RET_Z};
+    opcodes[0xC9] = {"RET",          &CPU::OP_RET};
+    opcodes[0xCA] = {"JP Z, a16",    &CPU::OP_JP_Z_a16};
+    opcodes[0xCB] = {"PREFIX CB",    &CPU::OP_CB_prefix};
+    opcodes[0xCC] = {"CALL Z, a16",  &CPU::OP_CALL_Z_a16};
+    opcodes[0xCD] = {"CALL a16",     &CPU::OP_CALL_a16};
+    opcodes[0xCE] = {"ADC A, d8",    &CPU::OP_ADC_A_d8};
+    opcodes[0xCF] = {"RST 08H",      &CPU::OP_RST_08H};
+    opcodes[0xD0] = {"RET NC",       &CPU::OP_RET_NC};
+    opcodes[0xD1] = {"POP DE",       &CPU::OP_POP_DE};
+    opcodes[0xD2] = {"JP NC, a16",   &CPU::OP_JP_NC_a16};
+    opcodes[0xD3] = {"UND D3",       &CPU::OP_UNDEFINED_D3};
+    opcodes[0xD4] = {"CALL NC, a16", &CPU::OP_CALL_NC_a16};
+    opcodes[0xD5] = {"PUSH DE",      &CPU::OP_PUSH_DE};
+    opcodes[0xD6] = {"SUB d8",       &CPU::OP_SUB_d8};
+    opcodes[0xD7] = {"RST 10H",      &CPU::OP_RST_10H};
+    opcodes[0xD8] = {"RET C",        &CPU::OP_RET_C};
+    opcodes[0xD9] = {"RETI",         &CPU::OP_RETI};
+    opcodes[0xDA] = {"JP C, a16",    &CPU::OP_JP_C_a16};
+    opcodes[0xDB] = {"UND DB",       &CPU::OP_UNDEFINED_DB};
+    opcodes[0xDC] = {"CALL C, a16",  &CPU::OP_CALL_C_a16};
+    opcodes[0xDD] = {"UND DD",       &CPU::OP_UNDEFINED_DD};
+    opcodes[0xDE] = {"SBC A, d8",    &CPU::OP_SBC_A_d8};
+    opcodes[0xDF] = {"RST 18H",      &CPU::OP_RST_18H};
+    opcodes[0xE0] = {"LDH (a8), A",  &CPU::OP_LDH_a8_A};
+    opcodes[0xE1] = {"POP HL",       &CPU::OP_POP_HL};
+    opcodes[0xE2] = {"LD (C), A",    &CPU::OP_LD_aC_A};
+    opcodes[0xE3] = {"UND E3",       &CPU::OP_UNDEFINED_E3};
+    opcodes[0xE4] = {"UND E4",       &CPU::OP_UNDEFINED_E4};
+    opcodes[0xE5] = {"PUSH HL",      &CPU::OP_PUSH_HL};
+    opcodes[0xE6] = {"AND d8",       &CPU::OP_AND_d8};
+    opcodes[0xE7] = {"RST 20H",      &CPU::OP_RST_20H};
+    opcodes[0xE8] = {"ADD SP, r8",   &CPU::OP_ADD_SP_r8};
+    opcodes[0xE9] = {"JP (HL)",      &CPU::OP_JP_HL};
+    opcodes[0xEA] = {"LD (a16), A",  &CPU::OP_LD_a16_A};
+    opcodes[0xEB] = {"UND EB",       &CPU::OP_UNDEFINED_EB};
+    opcodes[0xEC] = {"UND EC",       &CPU::OP_UNDEFINED_EC};
+    opcodes[0xED] = {"UND ED",       &CPU::OP_UNDEFINED_ED};
+    opcodes[0xEE] = {"XOR d8",       &CPU::OP_XOR_d8};
+    opcodes[0xEF] = {"RST 28H",      &CPU::OP_RST_28H};
+    opcodes[0xF0] = {"LDH A, (a8)",  &CPU::OP_LDH_A_a8};
+    opcodes[0xF1] = {"POP AF",       &CPU::OP_POP_AF};
+    opcodes[0xF2] = {"LD A, (C)",    &CPU::OP_LD_A_aC};
+    opcodes[0xF3] = {"DI",           &CPU::OP_DI};
+    opcodes[0xF4] = {"UND F4",       &CPU::OP_UNDEFINED_F4};
+    opcodes[0xF5] = {"PUSH AF",      &CPU::OP_PUSH_AF};
+    opcodes[0xF6] = {"OR d8",        &CPU::OP_OR_d8};
+    opcodes[0xF7] = {"RST 30H",      &CPU::OP_RST_30H};
+    opcodes[0xF8] = {"LD HL, SP+r8", &CPU::OP_LD_HL_SP_r8};
+    opcodes[0xF9] = {"LD SP, HL",    &CPU::OP_LD_SP_HL};
+    opcodes[0xFA] = {"LD A, (a16)",  &CPU::OP_LD_A_a16};
+    opcodes[0xFB] = {"EI",           &CPU::OP_EI};
+    opcodes[0xFC] = {"UND FC",       &CPU::OP_UNDEFINED_FC};
+    opcodes[0xFD] = {"UND FD",       &CPU::OP_UNDEFINED_FD};
+    opcodes[0xFE] = {"CP d8",        &CPU::OP_CP_d8};
+    opcodes[0xFF] = {"RST 38H",      &CPU::OP_RST_38H};
 }
 
 u8 CPU::fetch8() {
