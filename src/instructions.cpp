@@ -737,8 +737,10 @@ u32 CPU::OP_RET_C() {
     }
 }
 
-// FIXME
 u32 CPU::OP_RETI() {
+    pc = mmu->read16(sp);
+    sp += 2;
+    ime_enable_next = 1;
     return 16;
 }
 
@@ -894,8 +896,8 @@ u32 CPU::OP_LD_A_aC() {
     return 8;
 }
 
-// FIXME
 u32 CPU::OP_DI() {
+    ime = 0;
     return 4;
 }
 
@@ -937,8 +939,8 @@ u32 CPU::OP_LD_A_a16() {
     return 16;
 }
 
-// FIXME
 u32 CPU::OP_EI() {
+    ime_enable_next = 1;
     return 4;
 }
 

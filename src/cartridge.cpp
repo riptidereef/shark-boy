@@ -69,6 +69,14 @@ u16 Cartridge::read16(u16 address) {
     else return 0xFFFF;
 }
 
+void Cartridge::write8(u16 address, u8 data) {
+
+}
+
+void Cartridge::write16(u16 address, u16 data) {
+    
+}
+
 inline std::string getCartridgeType(u8 cartType) {
     switch (cartType) {
         case 0x00: return "ROM ONLY";

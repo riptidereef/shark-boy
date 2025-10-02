@@ -29,8 +29,9 @@ public:
 
     u8 read8(u16 address);
     u16 read16(u16 address);
+    void write8(u16 address, u8 data);
+    void write16(u16 address, u16 data);
 
-    
 private:
     bool loadRom(string filename);
 

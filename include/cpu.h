@@ -16,6 +16,9 @@ public:
     u16 sp;
     u16 pc;
 
+    bool ime = 0;
+    bool ime_enable_next = 0;
+
     u8 fetch8();
     u16 fetch16();
     u8 peek8();

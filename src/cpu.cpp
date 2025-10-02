@@ -750,6 +750,12 @@ u32 CPU::Instruction::execute(CPU* cpu) const {
 }
 
 void CPU::step() {
+    
+    if (ime_enable_next) {
+        ime = 1;
+        ime_enable_next = 0;
+    }
+
     u8 opcode = mmu->read8(pc);
     u16 startPc = pc;
     pc++;
@@ -765,7 +771,5 @@ void CPU::step() {
     }
 
     u32 cycles = instr.execute(this);
-    cout << "0x" << right << uppercase << setfill('0') << setw(4) << hex << startPc << " ";
-    cout << left << setw(14) << setfill(' ') << instr.name;
-    cout << dec << ": " << cycles << "\n";
+    cout << "0x" << right << uppercase << setfill('0') << setw(4) << hex << startPc << " " << left << setw(14) << setfill(' ') << instr.name << dec << ": " << cycles << "\n";
 }

@@ -24,5 +24,6 @@ private:
     array<u8, 0xA0> oam {};
     array<u8, 0x80> io {};
     array<u8, 0x7F> hram {};
-    u8 interruptEnable = 0;
+    u8 if_reg = 0;
+    u8 ie = 0;
 };
