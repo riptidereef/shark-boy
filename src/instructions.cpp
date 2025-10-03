@@ -923,8 +923,17 @@ u32 CPU::OP_RST_30H() {
     return 16;
 }
 
-// FIXME
 u32 CPU::OP_LD_HL_SP_r8() {
+    setZ(0);
+    setN(0);
+
+    s8 r8 = static_cast<s8>(fetch8());
+    u16 res = sp + r8;
+    
+    setH(((sp & 0xF) + (r8 & 0xF)) > 0xF);
+    setC(((sp & 0xFF) + static_cast<u8>(r8)) > 0xFF);
+
+    regs.hl = res;
     return 12;
 }
 
