@@ -94,7 +94,7 @@ u32 CPU::OP_RRCA() {
 // FIXME
 u32 CPU::OP_STOP() {
     fetch8();
-
+    // Push for the streak
     return 4;
 }
 
