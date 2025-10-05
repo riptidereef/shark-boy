@@ -5,6 +5,7 @@
 class CPU {
 public:
     CPU(MMU* mmu);
+    void updateOpcodeTables();
     
     struct {
         union { struct { u8 f, a; }; u16 af; };
@@ -18,6 +19,7 @@ public:
 
     bool ime = 0;
     bool ime_enable_next = 0;
+    bool halted = false;
 
     u8 fetch8();
     u16 fetch16();
@@ -69,6 +71,8 @@ public:
     };
     
     void step();
+    Instruction fetchInstruction();
+    bool handleInterrupts();
     
     // 0x00-0x0F
     u32 OP_NOP();
