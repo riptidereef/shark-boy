@@ -4,6 +4,6 @@ using namespace std;
 
 int main() {
     Emulator sharkBoy;
-    sharkBoy.loadCartridge("data/PokemonRed.gb");
+    sharkBoy.loadCartridge("data/cpu_instrs.gb");
     sharkBoy.run();
 }

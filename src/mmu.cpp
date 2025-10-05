@@ -1,7 +1,35 @@
 #include "mmu.h"
 
-MMU::MMU(PPU* ppu) {
-    this->ppu = ppu;
+MMU::MMU(PPU* ppu) 
+    : ppu(ppu),
+      joyp(io[0x00]),
+      sb(io[0x01]),
+      sc(io[0x02]),
+      div(io[0x04]),
+      tima(io[0x05]),
+      tma(io[0x06]),
+      tac(io[0x07]),
+      if_reg(io[0x0F]),
+      lcdc(io[0x40]),
+      stat(io[0x41]),
+      scy(io[0x42]),
+      scx(io[0x43]),
+      ly(io[0x44]),
+      lyc(io[0x45]),
+      dma(io[0x46]),
+      bgp(io[0x47]),
+      obp0(io[0x48]),
+      obp1(io[0x49]),
+      wy(io[0x4A]),
+      wx(io[0x4B]),
+      ie(ie_backing)
+{
+    fill(begin(io), end(io), 0x00);
+    fill(begin(wram), end(wram), 0x00);
+    fill(begin(hram), end(hram), 0x00);
+    fill(begin(oam), end(oam), 0x00);
+
+    ie = 0x00;
 }
 
 void MMU::setCartridge(Cartridge* cartridge) {
@@ -39,10 +67,6 @@ void MMU::write8(u16 address, u8 data) {
     }
     else if (address <= 0xFF7F) {
         // I/O Registers
-        if (address == 0xFF0F) {
-            if_reg = data;
-        }
-
         io[address - 0xFF00] = data;
     }
     else if (address <= 0xFFFE) {
@@ -86,11 +110,6 @@ u8 MMU::read8(u16 address) {
     }
     else if (address <= 0xFF7F) {
         // I/O Registers
-
-        if (address == 0xFF0F) {
-            return if_reg;
-        }
-
         return io[address - 0xFF00];
     }
     else if (address <= 0xFFFE) {
