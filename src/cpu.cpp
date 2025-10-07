@@ -238,7 +238,14 @@ u32 CPU::Instruction::execute(CPU* cpu) const {
 }
 
 void CPU::step() {
+
     if (handleInterrupts()) {
+        // cycles += 20
+        return;
+    }
+    
+    if (halted) {
+        // cycles += 4
         return;
     }
 
@@ -248,12 +255,18 @@ void CPU::step() {
     }
 
     Instruction instr = fetchInstruction();
-    u32 cycles = instr.execute(this);
+    instr.execute(this);
+    // cycles += instrCycles;
 }
 
 CPU::Instruction CPU::fetchInstruction() {
     u16 startPc = pc;
-    u8 opcode = fetch8();
+    u8 opcode = mmu->read8(pc);
+
+    if (!halt_bug) {
+        pc++;
+    }
+    halt_bug = false;
 
     Instruction instr;
     if (opcode == 0xCB) {
@@ -273,6 +286,33 @@ CPU::Instruction CPU::fetchInstruction() {
 }
 
 bool CPU::handleInterrupts() {
-    // push for the streak
+    u8 pending = mmu->ie & mmu->if_reg;
+
+    if (halted && pending) {
+        halted = false;
+    }
+    
+    if (!ime || !pending) return false;
+
+    for (int i = 0; i <= 4; i++) {
+        if (pending & (1 << i)) {
+            mmu->if_reg &= ~(1 << i);
+            ime = 0;
+
+            sp -= 2;
+            mmu->write16(sp, pc);
+
+            switch (i) {
+                case 0: pc = 0x0040; break;
+                case 1: pc = 0x0048; break;
+                case 2: pc = 0x0050; break;
+                case 3: pc = 0x0058; break;
+                case 4: pc = 0x0060; break;
+            }
+
+            return true;
+        }
+    }
+
     return false;
 }

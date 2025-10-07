@@ -20,6 +20,7 @@ public:
     bool ime = 0;
     bool ime_enable_next = 0;
     bool halted = false;
+    bool halt_bug = false;
 
     u8 fetch8();
     u16 fetch16();

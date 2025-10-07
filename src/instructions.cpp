@@ -607,10 +607,8 @@ u32 CPU::OP_RRCA() {
     return 4;
 }
 
-// FIXME
 u32 CPU::OP_STOP() {
     fetch8();
-    // Push for the streak
     return 4;
 }
 
@@ -966,7 +964,18 @@ u32 CPU::OP_LD_HL_D() { mmu->write8(regs.hl, regs.d); return 8; }
 u32 CPU::OP_LD_HL_E() { mmu->write8(regs.hl, regs.e); return 8; }
 u32 CPU::OP_LD_HL_H() { mmu->write8(regs.hl, regs.h); return 8; }
 u32 CPU::OP_LD_HL_L() { mmu->write8(regs.hl, regs.l); return 8; }
-u32 CPU::OP_HALT() { return 4; }; // FIXME
+
+u32 CPU::OP_HALT() { 
+    if (!ime && (mmu->ie & mmu-> if_reg)) {
+        halt_bug = true;
+    }
+    else {
+        halted = true;
+    }
+    
+    return 4; 
+};
+
 u32 CPU::OP_LD_HL_A() { mmu->write8(regs.hl, regs.a); return 8; }
 u32 CPU::OP_LD_A_B() { regs.a = regs.b; return 4; }
 u32 CPU::OP_LD_A_C() { regs.a = regs.c; return 4; }
