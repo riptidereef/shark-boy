@@ -273,5 +273,6 @@ CPU::Instruction CPU::fetchInstruction() {
 }
 
 bool CPU::handleInterrupts() {
+    // push for the streak
     return false;
 }
