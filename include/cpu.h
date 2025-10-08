@@ -74,6 +74,7 @@ public:
     void step();
     Instruction fetchInstruction();
     bool handleInterrupts();
+    void handleSerial();
     
     // 0x00-0x0F
     u32 OP_NOP();

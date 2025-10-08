@@ -15,6 +15,6 @@ void Emulator::loadCartridge(const string& romPath) {
 }
 
 void Emulator::run() {
-    for (int i = 0; i < 200; i++)
+    for (int i = 0; i < 10000000; i++)
         cpu->step();
 }

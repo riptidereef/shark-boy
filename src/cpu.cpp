@@ -257,6 +257,8 @@ void CPU::step() {
     Instruction instr = fetchInstruction();
     instr.execute(this);
     // cycles += instrCycles;
+
+    handleSerial();
 }
 
 CPU::Instruction CPU::fetchInstruction() {
@@ -278,9 +280,11 @@ CPU::Instruction CPU::fetchInstruction() {
         instr = opcodes[opcode];
     }
 
+    /*
     cout << "0x" << right << uppercase << setfill('0') << setw(4) 
          << hex << startPc << " " << left << setw(14) << setfill(' ') 
          << instr.name << "\n";
+    */
 
     return instr;
 }
@@ -315,4 +319,12 @@ bool CPU::handleInterrupts() {
     }
 
     return false;
+}
+
+void CPU::handleSerial() {
+    if (mmu->sc & 0x80) {
+        cout << static_cast<char>(mmu->sb);
+        mmu->sc &= ~0x80;
+        mmu->if_reg |= (1 << 3);
+    }
 }
