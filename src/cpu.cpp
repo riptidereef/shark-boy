@@ -255,9 +255,9 @@ void CPU::step() {
     }
 
     Instruction instr = fetchInstruction();
-    instr.execute(this);/// hi
+    instr.execute(this);
     // cycles += instrCycles;
-
+    // push for streak
     handleSerial();
 }
 
